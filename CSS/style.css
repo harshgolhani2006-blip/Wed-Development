@@ -1,0 +1,13 @@
+
+    body{
+        
+        background-color: rgb(237, 237, 19);
+        background-image:url("https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg");
+         background-size:cover;
+     } h1{ color: blue;
+        }
+        p{
+            font-size: 20px;
+            color : rgb(255, 68, 0);       
+        }
+            
