@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Box</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            background: #218de0;
+            font-family: Arial, sans-serif;
+        }
+
+        .Main{
+            width: 80vw;
+            height: 90vh;
+            background-color: gainsboro;
+            margin: 5vh auto;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .Main:hover{
+            transform: scale(1.01);
+            box-shadow: 0px 0px 20px gray;
+        }
+
+        .sub1{
+            width: 45%;
+            background-color: yellow;
+            padding: 30px;
+            border-radius: 15px;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .sub2{
+            width: 45%;
+            background-color: blueviolet;
+            border-radius: 15px;
+            padding: 20px;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sub1:hover{
+            box-shadow: 0px 0px 15px orange;
+        }
+
+        .sub2:hover{
+            box-shadow: 0px 0px 15px purple;
+        }
+
+        /* IMAGE STYLE */
+        .sub2 img{
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+
+        /* Image Hover Effect */
+        .sub2 img:hover{
+            transform: scale(1.03);
+            box-shadow: 0px 0px 20px black;
+        }
+
+        form input,
+        form button{
+            display: block;
+            width: 85%;
+            height: 40px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: none;
+            padding-left: 10px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        form input:hover{
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px lightgray;
+        }
+
+        button{
+            background-color: dodgerblue;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover{
+            background-color: #0073e6;
+            box-shadow: 0px 0px 10px dodgerblue;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Main">
+        <div class="sub1">
+            <h1>Login Here</h1>
+            <form>
+                <input type="text" placeholder="Enter name">
+                <input type="number" placeholder="Enter PhoneNo">
+                <input type="email" placeholder="Enter email id">
+                <input type="password" placeholder="Enter password">
+                <button>Sign In</button>
+            </form>
+        </div>
+
+        <div class="sub2">
+            <img src="https://img.freepik.com/free-photo/courage-man-jump-through-gap-hill-business-concept-idea_1323-262.jpg?semt=ais_hybrid&w=740&q=80"alt="Jump">
+        </div>
+    </div>
+</body>
+</html>
