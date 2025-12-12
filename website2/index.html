@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Javascript Used file.</title>
+
+    <style>
+        body {
+            background-color: hotpink;
+            font-family: Arial, sans-serif;
+        }
+
+        #Heading {
+            background-color: brown;
+            text-align: center;
+            color: white;
+            padding: 10px;
+        }
+
+        button {
+            width: 100px;
+            padding: 10px;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #B1 { background-color: green; }
+        #B2 { background-color: red; }
+
+        button:hover {
+            color:rgb(133, 15, 244);
+            background-color:yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="Heading">Is Javascript Easy??</h1>
+
+    <button id="B1">Yes</button>
+    <button id="B2">No</button>
+
+    <script>
+        document.getElementById("B1").onclick = function () {
+            document.getElementById("Heading").innerHTML = "Yes, JavaScript Is Easy Guys!🫡🫡";
+        }
+
+        document.getElementById("B2").onclick = function () {
+            document.getElementById("Heading").innerHTML = "No, If You Do Not Practice👋.";
+        }
+    </script>
+
+</body>
+</html>
