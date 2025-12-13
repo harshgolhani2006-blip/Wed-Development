@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Website</title>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: black;
+            font-family: Arial, sans-serif;
+        }
+
+        .Main1 {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #Main_Image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(70%);
+        }
+
+        .Sub11, .Sub12 {
+            position: absolute;
+            top: 50px;
+        }
+        .Sub11 { right: 50px; }
+        .Sub12 { left: 50px; }
+
+        .Sub11 img, .Sub12 img {
+            width: 150px;
+        }
+
+        .Sub13 {
+            position: absolute;
+            left: 30px;
+            top: 200px;
+            background-color: rgba(0,0,0,0.6);
+            padding: 20px 40px;
+            border-radius: 10px;
+        }
+
+        .Sub13 table td {
+            color: white;
+            font-size: 24px;
+            padding-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .Sub13 a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .Sub13 table td:hover {
+            color: yellow;
+        }
+
+        .Sub14 {
+            position: absolute;
+            bottom: 5vh;
+            width: 100%;
+            text-align: center;
+        }
+
+        .Sub14 h1 {
+            color: white;
+            font-size: 40px;
+            text-shadow:10px black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Main1">
+        <img src="https://images.hindustantimes.com/auto/img/2024/12/10/600x338/Mercedes_G-Class_electric_1720591625231_1733826912567.jpg" alt="car" id="Main_Image">
+
+        <div class="Sub11">
+            <img src="https://icon2.cleanpng.com/20180703/ip/kisspng-mercedes-benz-a-class-car-porsche-mercedes-b-class-fiat-qubo-5b3c4618163f92.5748209815306767600911.jpg">
+        </div>
+
+        <div class="Sub12">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqrEP_kSO-kydYVYzxAYlszVZjvSeRpMyc6w&s">
+        </div>
+
+        <div class="Sub13">
+            <table>
+                <tr><td><a href="index.html">Home</a></td></tr>
+                <tr><td><a href="booking.html">Booking</a></td></tr>
+                <tr><td><a href="model.html">Models</a></td></tr>
+                <tr><td><a href="rating.html">Rating</a></td></tr>
+                <tr><td><a href="about.html">About</a></td></tr>
+            </table>
+        </div>
+
+        <div class="Sub14">
+            <h1>Mercedes Veryron</h1>
+        </div>
+    </div>
+</body>
+</html>
