@@ -206,7 +206,7 @@
     </div>
 </body>
 </html> -->
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -267,6 +267,68 @@
     <div id="Box1">
         <div id="Box2"></div>
         <div id="Box3"></div>
+    </div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transition</title>
+    <style>
+        body {
+            height: 100vh;
+            width:150vw;
+        }
+        #main {
+            gap: 20px;
+            height: 50%;
+            width: 50%;
+            border : 30px solid red;
+        }
+        #main :hover{
+            margin-left: 100px;
+
+        }
+        .circle {
+            width: 200px;
+            height: 200px;
+            margin: 20px;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition-duration: 5s ;
+        }
+        #main:hover .circle {
+           margin-left: 2500px;
+           transition-duration: 2s ;
+            
+        }
+       
+        #c1 {
+            background-color: lightcoral;
+            transition-timing-function: linear;
+        }
+        #c2 {
+            background-color: lightseagreen;
+            transition-timing-function: ease-in;
+        }
+        #c3 {
+            background-color: rgb(238, 255, 0);
+            transition-timing-function: ease-out;
+        }
+        #c4 {
+            background-color: rgb(0, 255, 55);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div class="circle" id="c1"></div>
+        <div class="circle" id="c2"></div>
+        <div class="circle" id="c3"></div>
+        <div class="circle" id="c4"></div>
     </div>
 </body>
 </html>

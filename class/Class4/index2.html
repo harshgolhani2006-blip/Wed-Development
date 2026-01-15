@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment</title>
+    <style>
+        #parent{
+            background-color: black;
+            height: 100px;
+            width: 100%;
+            display: flex;
+            color:white;
+            font-size: 20px;
+            align-items: center;
+            justify-content:space-between;
+        }
+        #parent div{
+            color: white;
+            font-size: 20px;
+        }
+        #parent :nth-child(6){
+            background-color: white;
+            color: blue;
+           
+        }
+        p{
+            font-size: 30px;
+            font-weight: bold;
+            justify-content: baseline;
+            align-items: first baseline;
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        <p>Amazon</p>
+        <div>Home</div>
+        <div>Source</div>
+        <div>Class</div>
+        <div>About</div>
+        <div>Login</div>
+    </div>
+
+</body>
+</html>
