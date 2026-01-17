@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Box</title>
+<style>
+    body{
+        background-color: lightcoral;
+        text-align: center;
+        font-size: 20px;
+    }
+    #container{
+        padding-top: 50px;
+       height: 400px;
+        width:100%;
+        border: 2px solid black;
+        background-color: white;
+        display: flex;
+        justify-content: space-around;
+        align-items: space-around;
+        flex-wrap: wrap;
+       /* flex-direction: row;*/
+      /* flex-direction: row-reverse; */
+      /* flex-direction: column; */
+        /* flex-direction: column-reverse; */
+    }
+    .box{
+       height: 100px;
+       width: 100px;
+       background-color: rgba(8, 123, 230, 0.905);
+         border: 2px solid black;
+         display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+
+    }
+    #One{
+       /* flex-basis: 200px;*/
+       /*flex-grow: 1;*/
+        /* flex-shrink: 3; */
+
+    }
+    #Two{
+       /* flex-grow: 3; */
+     /* flex-shrink: 1; */
+
+    }
+</style>
+</head>
+<body>
+    <h4><u>Flexbox Parent Properties Demo.</u></h4>
+    <div id="container">
+        <div class="box" id="One">1 </div>
+            <div class="box" id="Two">2</div>
+            <div class="box">3</div>
+            <div class="box">4</div>
+            <div class="box">5</div>
+            <div class="box">6</div>
+            <div class="box">7</div>
+            <div class="box">8</div>
+       
+    </div>
+</body>
+</html>
