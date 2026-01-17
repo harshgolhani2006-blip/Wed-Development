@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Cards</title>
+
+<style>
+/* ===== RESET ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+/* ===== HEADER ===== */
+header{
+    background:black;
+    color:white;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-size:14px;
+}
+
+/* ===== CARD CONTAINER ===== */
+.container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    max-width:900px;
+    margin:50px auto;
+    gap:40px;
+    justify-items:center;
+}
+
+/* ===== CARD ===== */
+.card{
+    background:white;
+    width:260px;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    position:relative;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+     transition: transform 0.5s ease;
+}
+.card:hover{
+   
+    box-shadow:0 15px 30px rgba(0,0,0,0.25);
+   
+     transform: scale(1.08);
+}
+/* Status badge */
+.status{
+    position:absolute;
+    top:15px;
+    right:15px;
+    font-size:10px;
+    padding:4px 10px;
+    border-radius:20px;
+    color:white;
+}
+
+.online{ 
+    background:green;
+ }
+.offline{ 
+    background:red; 
+}
+
+/* Avatar */
+.avatar{
+    width:70px;
+    height:70px;
+    background:black;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    margin:10px auto;
+}
+
+/* Text */
+.name{
+    font-size:20px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.role{
+    color:gray;
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.desc{
+    border:1px dashed #ccc;
+    padding:10px;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+/* Button */
+.btn{
+    background:black;
+    color:white;
+    border:none;
+    padding:8px 22px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.btn:hover{
+    background:#333;
+}
+
+/* Help Button */
+.help{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:red;
+    color:white;
+    padding:10px 16px;
+    border-radius:50px;
+    cursor:pointer;
+     transition: transform 0.5s ease;
+}
+
+.help:hover{
+    background:yellowgreen;
+     box-shadow:0 15px 30px rgba(0,0,0,0.25);
+     transform: scale(1.08);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>MyWebsite</h2>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <span class="status online">ONLINE</span>
+        <div class="avatar">R</div>
+        <div class="name">Rahul</div>
+        <div class="role">Web Developer</div>
+        <div class="desc">Builds modern websites using HTML & CSS.</div>
+        <button class="btn">View Profile</button>
+    </div>
+
+    <div class="card">
+        <span class="status offline">OFFLINE</span>
+        <div class="avatar">N</div>
+        <div class="name">Neha</div>
+        <div class="role">UI Designer</div>
+        <div class="desc">Designs clean and user-friendly interfaces.</div>
+        <button class="btn">View Profile</button>
+    </div>
+
+    <div class="card">
+        <span class="status online">ONLINE</span>
+        <div class="avatar">A</div>
+        <div class="name">Aman</div>
+        <div class="role">Backend Developer</div>
+        <div class="desc">Works with server logic and databases.</div>
+        <button class="btn">View Profile</button>
+    </div>
+
+    <div class="card">
+        <span class="status online">ONLINE</span>
+        <div class="avatar">S</div>
+        <div class="name">Sneha</div>
+        <div class="role">Content Writer</div>
+        <div class="desc">Writes engaging and SEO-friendly content.</div>
+        <button class="btn">View Profile</button>
+    </div>
+
+    <div class="card">
+        <span class="status offline">OFFLINE</span>
+        <div class="avatar">K</div>
+        <div class="name">Karan</div>
+        <div class="role">Digital Marketer</div>
+        <div class="desc">Manages digital marketing campaigns.</div>
+        <button class="btn">View Profile</button>
+    </div>
+     <div class="card">
+        <span class="status offline">OFFLINE</span>
+        <div class="avatar">K</div>
+        <div class="name">Kartik</div>
+        <div class="role">Bloggers</div>
+        <div class="desc">Blog writer and content write in blog</div>
+        <button class="btn">View Profile</button>
+    </div>
+
+</div>
+
+<div class="help">Help</div>
+
+</body>
+</html>
