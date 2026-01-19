@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Card</title>
+    <style>
+        body{
+            perspective: 900px;
+            background-color: saddlebrown;
+        }
+        header{
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            
+        }
+        #main{
+            height: 500px;
+            position: relative;
+            width: 300px;
+            margin: 40px auto;
+         
+            transform-style: preserve-3d;
+            transition: 3s;
+            
+        }
+        #main:hover{
+            transform: rotateY(180deg);
+
+        }
+        #card_a{
+            height: 50%;
+            position: absolute;
+            width: 100%;
+           z-index: 7;
+            backface-visibility: hidden;
+        
+        }
+        img{
+            height: 100%;
+            width: 100%;
+           
+
+        }
+        #card_b{
+            height: 50%;
+            width: 100%;
+            z-index: 3;
+            transform: rotateY(180deg);
+            position: absolute;
+            background-color: rebeccapurple;
+        }
+        #card_b p{
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color:gold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Flip Card Using CSS</h2>
+    </header>
+    <div id="main">
+        <div id="card_a">
+            <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKg7ToYlKP7LPA-FpOKSdqyN7drQ__-mesDw&s"/>
+        </div>
+        <div id="card_b">
+            <p>Harsh Golhani</p>
+            <p>Web Developer</p>
+            <p>CSE Engineer</p>
+            <p>Global College</p>
+        </div>
+    </div>
+</body>
+</html>
