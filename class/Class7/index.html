@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Concept.</title>
+    <style>
+        div{
+            height: 400px;
+            width: 400px;
+            background-color: purple;
+           animation-name: Example; 
+           animation-duration: 4s; 
+           animation-iteration-count: infinite; 
+           /* animation-delay: 3s; */
+           /* animation-direction: alternate; */
+           /* animation-play-state: paused;*/
+        }
+        div:hover{
+           animation-play-state: running; 
+          /* animation-name: Example; */
+        /*  animation-duration: 4s; */
+        }
+        @keyframes Example {
+            0%{
+                background-color: red;
+                height: 400px;
+                width: 400px;
+                border-radius: 25px;
+            }
+            25%{
+                background-color: yellow;
+                height: 300px;
+                width: 300px;
+                border-radius: 50px;
+            }
+            50%{
+                background-color: green;
+                height: 200px;
+                width: 200px;
+                border-radius: 100px;
+            }
+            75%{
+                background-color: blue;
+                height: 100px;
+                width: 100px;
+                border-radius: 50px;
+            }
+            100%{
+                background-color: purple;
+                height: 400px;
+                width: 400px;
+                border-radius: 200px;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <h2>Animations</h2>
+    <div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment</title>
+    <style>
+        body{
+            background-color: rgb(230, 165, 165);
+        }
+        div{
+            height: 100px;
+            width: 100px;
+            background:linear-gradient(red,rgb(218, 121, 121));
+            border:2px solid black;
+            border-radius: 50%;
+            margin:  0% auto;
+            animation-name: move;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in;
+            animation-direction: alternate;
+            
+        }
+        @keyframes move {
+            0%{
+                transform: translateY(0px);
+            }
+          100%{
+            transform: translateY(85vh) rotate(360deg);
+          }  
+        }
+    </style>
+</head>
+<body>
+    <div>
+    </div>
+</body>
+</html>
