@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment</title>
+
+    <style>
+        .parent{
+            /* border: 2px solid; */
+            height: 700px;
+            display: grid;
+
+            grid-template-columns: 300px 300px 300px;
+            grid-auto-rows: 200px;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .child{
+            background-size: cover;
+            background-position: center;
+            transition: transform 1s
+        }
+       .child:hover{
+    transform: scale(0.9);
+}
+
+
+        #one{
+            background-image: url("https://images.unsplash.com/photo-1768310481123-9c8e4e6fc61a?w=600");
+        }
+
+        #Two{
+            background-image: url("https://plus.unsplash.com/premium_photo-1764598889620-d6b8667f3c77?w=600");
+        }
+
+        #Three{
+            background-image: url("https://images.unsplash.com/photo-1768405942773-87e8d4fb782b?w=600");
+        }
+
+        #Four{
+            background-image: url("https://images.unsplash.com/photo-1768409234914-96f61529b7e2?w=600");
+        }
+
+        #Five{
+            background-image: url("https://plus.unsplash.com/premium_photo-1768409720584-02301a560f51?w=600");
+
+            /* grid position */
+            grid-column: 2 / 4;
+            grid-row: 2 / 4;
+        }
+
+        #Six{
+            background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600");
+        }
+
+        #Seven{
+            background-image: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600");
+        }
+
+        #Eigth{
+            background-image: url("https://images.unsplash.com/photo-1493558103817-58b2924bce98?w=600");
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="parent">
+    <div class="child" id="one"></div>
+    <div class="child" id="Two"></div>
+    <div class="child" id="Three"></div>
+    <div class="child" id="Four"></div>
+    <div class="child" id="Five"></div>
+    <div class="child" id="Six"></div>
+    <div class="child" id="Seven"></div>
+    <div class="child" id="Eigth"></div>
+</div>
+
+</body>
+</html>
