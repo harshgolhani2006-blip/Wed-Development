@@ -6,15 +6,18 @@
     <title>Assignment</title>
 
     <style>
+      body{
+        background-color: gray;
+        }
         .parent{
             /* border: 2px solid; */
             height: 700px;
             display: grid;
-
             grid-template-columns: 300px 300px 300px;
             grid-auto-rows: 200px;
             gap: 20px;
             padding: 20px;
+            box-shadow: 40px black;
         }
 
         .child{
@@ -47,7 +50,7 @@
             background-image: url("https://plus.unsplash.com/premium_photo-1768409720584-02301a560f51?w=600");
 
             /* grid position */
-            grid-column: 2 / 4;
+            grid-column: 2 / 3;
             grid-row: 2 / 4;
         }
 
