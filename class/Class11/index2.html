@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+         nav{
+            height: 40px;
+            background-color: black;
+            display: flex;
+            /* justify-content: space-around; */
+            justify-content: space-between;
+            /* justify-content: space-evenly; */
+            align-items: center;
+         }
+         a{
+            color: snow;
+         }
+         #child_parent{
+            display: flex;
+         
+            width: 300px;
+            justify-content: space-between;
+
+         }
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+            <a>Home</a>
+        </div>
+        <div id="child_parent">
+            <a>About us</a>
+            <a>Contact us</a>
+            <a>help</a>
+
+        </div>
+        <div>
+            <button>Login</button>
+        </div>
+
+    </nav>
+</body>
+</html>
