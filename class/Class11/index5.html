@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manish G Techinfo</title>
+    <style>
+   /* NAVBAR */
+.custom-navbar {
+  background: #0f9d8a;
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.nav-wrapper {
+  width: 92%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LOGO */
+.logo {
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* MENU */
+.custom-navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.custom-navbar ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: 0.3s;
+}
+
+/* HOVER */
+.custom-navbar ul li a:hover {
+  color: gold;
+}
+
+.custom-navbar ul li a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: gold;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+
+.custom-navbar ul li a:hover::after {
+  width: 100%;
+}
+
+/* MOBILE VIEW */
+@media (max-width: 768px) {
+
+  .nav-wrapper {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .custom-navbar ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .custom-navbar ul li a {
+    font-size: 14px;
+  }
+
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="custom-navbar">
+  <div class="nav-wrapper">
+    <a href="/" class="logo">Manish G Techinfo</a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/search/label/Health">Health</a></li>
+      <li><a href="/search/label/Technology">Technology</a></li>
+      <li><a href="/search/label/Trending">Trending</a></li>
+      <li><a href="/p/about.html">About</a></li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>
