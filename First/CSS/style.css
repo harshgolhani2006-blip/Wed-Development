@@ -1,13 +1,62 @@
+body{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
 
-    body{
-        
-        background-color: rgb(237, 237, 19);
-        background-image:url("https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg");
-         background-size:cover;
-     } h1{ color: blue;
-        }
-        p{
-            font-size: 20px;
-            color : rgb(255, 68, 0);       
-        }
-            
+    /* Gradient background */
+    background-image: url("https://tinypng.com/static/images/boat.png");
+    background-size: cover;
+}
+
+/* Center box */
+.box{
+    background: white;
+    padding: 50px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    animation: fadeIn 1.5s ease;
+}
+
+h1{
+    color: #5b86e5;
+    font-size: 40px;
+    margin: 0;
+}
+
+p{
+    font-size: 18px;
+    margin: 10px 0 20px;
+    color: #333;
+}
+
+button{
+    padding: 10px 25px;
+    border: none;
+    border-radius: 20px;
+    background: #5b86e5;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover{
+    background: #36d1dc;
+    transform: scale(1.1);
+}
+
+/* Animation */
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
