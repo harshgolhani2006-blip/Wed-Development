@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Instagram Login</title>
+
+<style>
+/* Reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+   background: linear-gradient(red ,purple);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main container */
+.container{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    animation: fadeIn 1s ease-in;
+    
+}
+
+/* Left image */
+.left img{
+    width: 400px;
+}
+
+/* Right section */
+.right{
+    width: 350px;
+}
+
+/* Login box */
+.login-box{
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Instagram Gradient Logo */
+.logo{
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+     -webkit-background-clip: text;  
+    -webkit-text-fill-color: transparent;
+}
+
+/* Inputs */
+.login-box input{
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    border: 1px solid #dbdbdb;
+    background: #fafafa;
+    border-radius: 4px;
+}
+
+/* Button */
+.login-box button{
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #0095f6;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-box button:hover{
+    background: #007ad9;
+}
+
+/* OR text */
+.or{
+    margin: 15px 0;
+    color: #999;
+    font-size: 14px;
+}
+
+/* Links */
+.fb{
+    color: #385185;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.forgot{
+    font-size: 12px;
+    color: #00376b;
+    margin-top: 12px;
+}
+
+/* Signup box */
+.signup-box{
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.signup-box a{
+    color: #0095f6;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Animation */
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px){
+    .left{
+        display: none;
+    }
+    .container{
+        gap: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Left Image
+    <div class="left">
+        <img src="https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg" alt="mobile">
+    </div> -->
+
+    <!-- Right Login Section -->
+    <div class="right">
+        <div class="login-box">
+            <div class="logo">Instagram</div>
+
+            <input type="text" placeholder="Phone number, username, or email">
+            <input type="password" placeholder="Password">
+
+            <button>Log in</button>
+
+            <div class="or">OR</div>
+
+            <a href="#" class="fb">Log in with Facebook</a>
+            <div class="forgot">Forgot password?</div>
+        </div>
+
+        <div class="signup-box">
+            Don't have an account? <a href="#">Sign up</a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
