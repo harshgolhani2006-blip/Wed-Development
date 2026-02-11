@@ -1,90 +1,309 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Webpage</title>
-    <link rel="stylesheet" href="Style.css">
+<meta charset="UTF-8">
+<title>Agoda Full Project</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#f2f2f2;
+}
+
+/* Navbar */
+nav{
+    background:#ff3366;
+    color:white;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+nav h2{
+    cursor:pointer;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:20px;
+}
+
+nav ul li{
+    cursor:pointer;
+}
+
+.container{
+    padding:20px;
+}
+
+/* Login */
+.login-box{
+    width:300px;
+    background:white;
+    padding:20px;
+    margin:80px auto;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+.login-box input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+.btn{
+    background:#ff3366;
+    color:white;
+    border:none;
+    padding:10px;
+    width:100%;
+    cursor:pointer;
+}
+
+/* Search */
+.search-box{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+/* Hotels */
+.hotels{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.hotel-card{
+    background:white;
+    width:250px;
+    padding:10px;
+    box-shadow:0 0 5px rgba(0,0,0,0.2);
+}
+
+.hotel-card img{
+    width:100%;
+    height:150px;
+}
+
+.hidden{
+    display:none;
+}
+</style>
+
 </head>
 
 <body>
 
-    <div class="title">
-        <span style="color: orangered;">a</span>
-        <span style="color: yellow;">g</span>
-        <span style="color: green;">o</span>
-        <span style="color: purple;">d</span>
-        <span style="color: blue;">a</span>
+<!-- NAVBAR -->
+
+<nav class="hidden" id="navbar">
+    <h2 onclick="showPage('home')">Agoda</h2>
+    <ul>
+        <li onclick="showPage('home')">Home</li>
+        <li onclick="showPage('hotels')">Hotels</li>
+        <li onclick="showPage('booking')">My Booking</li>
+        <li onclick="showPage('contact')">Contact</li>
+        <li onclick="logout()">Logout</li>
+    </ul>
+    <span id="username"></span>
+</nav>
+
+<!-- LOGIN PAGE -->
+
+<div id="loginPage" class="login-box">
+    <h2>Login / Register</h2>
+    <input type="text" id="user" placeholder="Enter username">
+    <input type="password" id="pass" placeholder="Enter password">
+    <button class="btn" onclick="login()">Login</button>
+</div>
+
+<!-- HOME PAGE -->
+
+<div id="home" class="container hidden">
+    <div class="search-box">
+        <h3>Search Hotels</h3>
+        <input type="text" id="searchCity" placeholder="Enter City">
+        <button class="btn" onclick="searchHotel()">Search</button>
     </div>
+    <h2>Popular Hotels</h2>
+    <div class="hotels" id="hotelList"></div>
+</div>
 
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWMI1W8hGysYyE8NN34wn2nVxndaeqc-0Ktg&s" 
-         alt="Main Image">
+<!-- HOTELS PAGE -->
 
-    <h2 style="color: crimson;">Available Hotel Rooms</h2>
+<div id="hotels" class="container hidden">
+    <h2>All Hotels</h2>
+    <div class="hotels" id="allHotels"></div>
+</div>
 
-    <div class="Car">
+<!-- MY BOOKING -->
 
-        <div class="Bag">
-            <h3>Hotel Rooms</h3>
-            <img src="https://pix10.agoda.net/hotelImages/41355371/-1/708fdac0836e8fa20477d2435735fd46.jpg?ce=0&s=702x392" alt="image1">
-            <button>Book now</button>
+<div id="booking" class="container hidden">
+    <h2>My Booking</h2>
+    <div id="bookingDetails">No booking yet</div>
+</div>
+
+<!-- CONTACT -->
+
+<div id="contact" class="container hidden">
+    <h2>Contact Us</h2>
+    <p>Email: support@agoda.com</p>
+    <p>Phone: +91 9876543210</p>
+</div>
+
+<!-- PAYMENT PAGE -->
+
+<div id="paymentPage" class="login-box hidden">
+    <h2>Payment</h2>
+    <input type="text" placeholder="Card Number">
+    <input type="text" placeholder="Expiry Date">
+    <input type="text" placeholder="CVV">
+    <button class="btn" onclick="confirmPayment()">Pay Now</button>
+</div>
+
+<script>
+
+/* Sample Hotels Data */
+let hotels = [
+{city:"Delhi", name:"Taj Hotel", price:5000, img:"https://picsum.photos/250/150?1"},
+{city:"Mumbai", name:"Sea View", price:4000, img:"https://picsum.photos/250/150?2"},
+{city:"Jaipur", name:"Royal Palace", price:3500, img:"https://picsum.photos/250/150?3"},
+{city:"Goa", name:"Beach Resort", price:6000, img:"https://picsum.photos/250/150?4"},
+{city:"Delhi", name:"City Inn", price:3000, img:"https://picsum.photos/250/150?5"},
+{city:"Delhi", name:"Taj Hotel", price:5000, img:"https://picsum.photos/250/150?1"},
+{city:"Delhi", name:"City Inn", price:3000, img:"https://picsum.photos/250/150?2"},
+{city:"Delhi", name:"Grand Palace", price:4500, img:"https://picsum.photos/250/150?3"},
+
+{city:"Mumbai", name:"Sea View", price:4000, img:"https://picsum.photos/250/150?4"},
+{city:"Mumbai", name:"Marine Hotel", price:5500, img:"https://picsum.photos/250/150?5"},
+{city:"Mumbai", name:"City Crown", price:3800, img:"https://picsum.photos/250/150?6"},
+
+{city:"Jaipur", name:"Royal Palace", price:3500, img:"https://picsum.photos/250/150?7"},
+{city:"Jaipur", name:"Pink City Hotel", price:3200, img:"https://picsum.photos/250/150?8"},
+{city:"Jaipur", name:"Heritage Stay", price:4800, img:"https://picsum.photos/250/150?9"},
+
+{city:"Goa", name:"Beach Resort", price:6000, img:"https://picsum.photos/250/150?10"},
+{city:"Goa", name:"Ocean Paradise", price:5200, img:"https://picsum.photos/250/150?11"},
+{city:"Goa", name:"Sunset Villa", price:4500, img:"https://picsum.photos/250/150?12"},
+
+{city:"Bangalore", name:"Tech Park Hotel", price:4200, img:"https://picsum.photos/250/150?13"},
+{city:"Bangalore", name:"Green Leaf Stay", price:3500, img:"https://picsum.photos/250/150?14"},
+{city:"Bangalore", name:"Royal Orchid", price:5000, img:"https://picsum.photos/250/150?15"},
+
+{city:"Chennai", name:"Beachside Inn", price:3700, img:"https://picsum.photos/250/150?16"},
+{city:"Chennai", name:"City Tower Hotel", price:4100, img:"https://picsum.photos/250/150?17"},
+{city:"Chennai", name:"Comfort Stay", price:2900, img:"https://picsum.photos/250/150?18"},
+
+{city:"Hyderabad", name:"Pearl Residency", price:3600, img:"https://picsum.photos/250/150?19"},
+{city:"Hyderabad", name:"Royal Deccan", price:4700, img:"https://picsum.photos/250/150?20"},
+{city:"Hyderabad", name:"City Comfort", price:3100, img:"https://picsum.photos/250/150?21"},
+
+{city:"Kolkata", name:"Howrah Grand", price:3300, img:"https://picsum.photos/250/150?22"},
+{city:"Kolkata", name:"City Palace Hotel", price:3900, img:"https://picsum.photos/250/150?23"},
+{city:"Kolkata", name:"Heritage Inn", price:4400, img:"https://picsum.photos/250/150?24"},
+
+{city:"Pune", name:"Hill View Hotel", price:3500, img:"https://picsum.photos/250/150?25"},
+{city:"Pune", name:"Metro Stay", price:3000, img:"https://picsum.photos/250/150?26"},
+{city:"Pune", name:"Royal Comfort", price:4200, img:"https://picsum.photos/250/150?27"},
+];
+
+let selectedHotel = null;
+
+/* Login */
+function login(){
+    let user = document.getElementById("user").value;
+    if(user==""){
+        alert("Enter username");
+        return;
+    }
+    document.getElementById("loginPage").style.display="none";
+    document.getElementById("navbar").classList.remove("hidden");
+    document.getElementById("username").innerText="Welcome, "+user;
+    showPage("home");
+    loadHotels();
+}
+
+/* Logout */
+function logout(){
+    location.reload();
+}
+
+/* Show Page */
+function showPage(page){
+    let pages = ["home","hotels","booking","contact"];
+    pages.forEach(p=>{
+        document.getElementById(p).classList.add("hidden");
+    });
+    document.getElementById(page).classList.remove("hidden");
+}
+
+/* Load Hotels */
+function loadHotels(){
+    let list="";
+    hotels.forEach((h,i)=>{
+        list+=`
+        <div class="hotel-card">
+            <img src="${h.img}">
+            <h4>${h.name}</h4>
+            <p>City: ${h.city}</p>
+            <p>Price: ₹${h.price}</p>
+            <button class="btn" onclick="bookHotel(${i})">Book</button>
         </div>
+        `;
+    });
+    document.getElementById("hotelList").innerHTML=list;
+    document.getElementById("allHotels").innerHTML=list;
+}
 
-        <div class="Bag">
-            <h3>Hotel Rooms</h3>
-            <img src="https://pix10.agoda.net/hotelImages/67556075/1063835523/964f4c4bda2aa32e3cef464193989342.jpg?ce=2&s=702x392" alt="image1">
-            <button>Book now</button>
+/* Search */
+function searchHotel(){
+    let city=document.getElementById("searchCity").value.toLowerCase();
+    let filtered=hotels.filter(h=>h.city.toLowerCase().includes(city));
+    let list="";
+    filtered.forEach((h,i)=>{
+        list+=`
+        <div class="hotel-card">
+            <img src="${h.img}">
+            <h4>${h.name}</h4>
+            <p>City: ${h.city}</p>
+            <p>Price: ₹${h.price}</p>
+            <button class="btn" onclick="bookHotel(${i})">Book</button>
         </div>
+        `;
+    });
+    document.getElementById("hotelList").innerHTML=list;
+}
 
-        <div class="Bag">
-            <h3>Hotel Rooms</h3>
-            <img src="https://q-xx.bstatic.com/xdata/images/hotel/max500/480091970.jpg?k=c68558f1654b82358291107de07747bfc5dbc2d2b4aebafb244bd60950257217&o=" alt="image1">
-            <button>Book now</button>
-        </div>
+/* Book */
+function bookHotel(index){
+    selectedHotel = hotels[index];
+    document.getElementById("paymentPage").classList.remove("hidden");
+}
 
-        <div class="Bag">
-            <h3>Hotel Rooms</h3>
-            <img src="https://pix10.agoda.net/hotelImages/65455609/-1/9a5091780c71e82efd40e390ffd7639a.jpg?ce=0&s=702x392" alt="image1">
-            <button>Book now</button>
-        </div>
+/* Payment */
+function confirmPayment(){
+    document.getElementById("paymentPage").classList.add("hidden");
+    document.getElementById("bookingDetails").innerHTML=
+    `<h3>${selectedHotel.name}</h3>
+     <p>City: ${selectedHotel.city}</p>
+     <p>Price: ₹${selectedHotel.price}</p>
+     <p style="color:green;">Booking Confirmed</p>`;
+    alert("Booking Successful!");
+    showPage("booking");
+}
 
-    </div>
-
-    <h2 style="color: maroon;">Indigenous Hotels</h2>
-
-    <div class="Car">
-
-        <div class="Bag">
-            <h3>Hotel Rooms</h3>
-            <img src="https://pix10.agoda.net/hotelImages/266719/-1/b8aacd1208016b6b71c5675c06efb984.jpg?ca=0&ce=1&s=312x235&ar=16x9" alt="image2">
-            <button>Book now</button>
-        </div>
-
-        <div class="Bag">
-            <h3>Hotel Rooms</h3>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIoCsgjwiBEagRRNp7tvGu_eLN7BfQESCmEg&s" alt="image2">
-            <button>Book now</button>
-        </div>
-
-        <div class="Bag">
-            <h3>Hotel Rooms</h3>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsm68fgNGNtywOh1nHyo7vPL0CIxStsgkUdg&s" alt="image2">
-            <button>Book now</button>
-        </div>
-
-        <div class="Bag">
-            <h3>Hotel Rooms</h3>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRomlXvi-xXGOSKoSZbHW9xf3_GckmMG10s1w&s" alt="image2">
-            <button>Book now</button>
-        </div>
-
-    </div>
-
-    <h2>book@agoda.in</h2>
-
-    <footer>
-        © 2025 Agoda – Best Deals on Hotels, Flights & More
-    </footer>
+</script>
 
 </body>
 </html>
