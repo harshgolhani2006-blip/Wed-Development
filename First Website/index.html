@@ -172,16 +172,10 @@ nav ul li{
     <input type="text" placeholder="CVV">
     <button class="btn" onclick="confirmPayment()">Pay Now</button>
 </div>
-
 <script>
 
-/* Sample Hotels Data */
+/* Sample Hotels Data (cleaned) */
 let hotels = [
-{city:"Delhi", name:"Taj Hotel", price:5000, img:"https://picsum.photos/250/150?1"},
-{city:"Mumbai", name:"Sea View", price:4000, img:"https://picsum.photos/250/150?2"},
-{city:"Jaipur", name:"Royal Palace", price:3500, img:"https://picsum.photos/250/150?3"},
-{city:"Goa", name:"Beach Resort", price:6000, img:"https://picsum.photos/250/150?4"},
-{city:"Delhi", name:"City Inn", price:3000, img:"https://picsum.photos/250/150?5"},
 {city:"Delhi", name:"Taj Hotel", price:5000, img:"https://picsum.photos/250/150?1"},
 {city:"Delhi", name:"City Inn", price:3000, img:"https://picsum.photos/250/150?2"},
 {city:"Delhi", name:"Grand Palace", price:4500, img:"https://picsum.photos/250/150?3"},
@@ -204,19 +198,7 @@ let hotels = [
 
 {city:"Chennai", name:"Beachside Inn", price:3700, img:"https://picsum.photos/250/150?16"},
 {city:"Chennai", name:"City Tower Hotel", price:4100, img:"https://picsum.photos/250/150?17"},
-{city:"Chennai", name:"Comfort Stay", price:2900, img:"https://picsum.photos/250/150?18"},
-
-{city:"Hyderabad", name:"Pearl Residency", price:3600, img:"https://picsum.photos/250/150?19"},
-{city:"Hyderabad", name:"Royal Deccan", price:4700, img:"https://picsum.photos/250/150?20"},
-{city:"Hyderabad", name:"City Comfort", price:3100, img:"https://picsum.photos/250/150?21"},
-
-{city:"Kolkata", name:"Howrah Grand", price:3300, img:"https://picsum.photos/250/150?22"},
-{city:"Kolkata", name:"City Palace Hotel", price:3900, img:"https://picsum.photos/250/150?23"},
-{city:"Kolkata", name:"Heritage Inn", price:4400, img:"https://picsum.photos/250/150?24"},
-
-{city:"Pune", name:"Hill View Hotel", price:3500, img:"https://picsum.photos/250/150?25"},
-{city:"Pune", name:"Metro Stay", price:3000, img:"https://picsum.photos/250/150?26"},
-{city:"Pune", name:"Royal Comfort", price:4200, img:"https://picsum.photos/250/150?27"},
+{city:"Chennai", name:"Comfort Stay", price:2900, img:"https://picsum.photos/250/150?18"}
 ];
 
 let selectedHotel = null;
@@ -224,15 +206,17 @@ let selectedHotel = null;
 /* Login */
 function login(){
     let user = document.getElementById("user").value;
-    if(user==""){
+    if(user.trim() == ""){
         alert("Enter username");
         return;
     }
+
     document.getElementById("loginPage").style.display="none";
     document.getElementById("navbar").classList.remove("hidden");
-    document.getElementById("username").innerText="Welcome, "+user;
+    document.getElementById("username").innerText = "Welcome, " + user;
+
     showPage("home");
-    loadHotels();
+    loadHotels(hotels);
 }
 
 /* Logout */
@@ -249,62 +233,96 @@ function showPage(page){
     document.getElementById(page).classList.remove("hidden");
 }
 
-/* Load Hotels */
-function loadHotels(){
-    let list="";
-    hotels.forEach((h,i)=>{
-        list+=`
+/* Load Hotels (Reusable) */
+function loadHotels(data){
+    let list = "";
+    data.forEach((h)=>{
+        let index = hotels.indexOf(h); // original index
+
+        list += `
         <div class="hotel-card">
             <img src="${h.img}">
             <h4>${h.name}</h4>
             <p>City: ${h.city}</p>
             <p>Price: ₹${h.price}</p>
-            <button class="btn" onclick="bookHotel(${i})">Book</button>
+            <button class="btn" onclick="bookHotel(${index})">Book</button>
         </div>
         `;
     });
-    document.getElementById("hotelList").innerHTML=list;
-    document.getElementById("allHotels").innerHTML=list;
+
+    document.getElementById("hotelList").innerHTML = list;
+    document.getElementById("allHotels").innerHTML = list;
 }
+
 
 /* Search */
 function searchHotel(){
-    let city=document.getElementById("searchCity").value.toLowerCase();
-    let filtered=hotels.filter(h=>h.city.toLowerCase().includes(city));
-    let list="";
-    filtered.forEach((h,i)=>{
-        list+=`
-        <div class="hotel-card">
-            <img src="${h.img}">
-            <h4>${h.name}</h4>
-            <p>City: ${h.city}</p>
-            <p>Price: ₹${h.price}</p>
-            <button class="btn" onclick="bookHotel(${i})">Book</button>
-        </div>
-        `;
-    });
-    document.getElementById("hotelList").innerHTML=list;
+    let city = document.getElementById("searchCity").value.toLowerCase();
+
+    let filtered = hotels.filter(h =>
+        h.city.toLowerCase().includes(city)
+    );
+
+    if(filtered.length === 0){
+        document.getElementById("hotelList").innerHTML = "<h3>No hotels found</h3>";
+    }else{
+        loadHotels(filtered);
+    }
 }
 
 /* Book */
 function bookHotel(index){
     selectedHotel = hotels[index];
+
+    // Hide all pages
+    let pages = ["home","hotels","booking","contact"];
+    pages.forEach(p=>{
+        document.getElementById(p).classList.add("hidden");
+    });
+
+    // Show payment page
     document.getElementById("paymentPage").classList.remove("hidden");
 }
 
 /* Payment */
 function confirmPayment(){
+    if(!selectedHotel){
+        alert("No hotel selected");
+        return;
+    }
+
+    // Save booking in localStorage (like real website)
+    localStorage.setItem("booking", JSON.stringify(selectedHotel));
+
     document.getElementById("paymentPage").classList.add("hidden");
-    document.getElementById("bookingDetails").innerHTML=
-    `<h3>${selectedHotel.name}</h3>
-     <p>City: ${selectedHotel.city}</p>
-     <p>Price: ₹${selectedHotel.price}</p>
-     <p style="color:green;">Booking Confirmed</p>`;
-    alert("Booking Successful!");
+
+    document.getElementById("bookingDetails").innerHTML = `
+        <h3>${selectedHotel.name}</h3>
+        <p>City: ${selectedHotel.city}</p>
+        <p>Price: ₹${selectedHotel.price}</p>
+        <p style="color:green;">Payment Successful</p>
+    `;
+
+    alert("Booking Confirmed!");
     showPage("booking");
 }
+// Load saved booking on login
+function loadSavedBooking(){
+    let saved = localStorage.getItem("booking");
+    if(saved){
+        let hotel = JSON.parse(saved);
+        document.getElementById("bookingDetails").innerHTML = `
+            <h3>${hotel.name}</h3>
+            <p>City: ${hotel.city}</p>
+            <p>Price: ₹${hotel.price}</p>
+            <p style="color:green;">Booking Saved</p>
+        `;
+    }
+}
+
 
 </script>
+
 
 </body>
 </html>
