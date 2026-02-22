@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Agoda Full Project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agoda Project</title>
 <style>
 *{
     margin:0;
@@ -60,12 +61,25 @@ nav ul li{
 }
 
 .btn{
-    background:#ff3366;
-    color:white;
-    border:none;
-    padding:10px;
-    width:100%;
-    cursor:pointer;
+    background: linear-gradient(45deg, #ff3366, #ff6699);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* Hover effect */
+.btn:hover{
+    background: linear-gradient(45deg, #e6004c, #ff3366);
+    transform: scale(1.05);
+}
+
+/* Click effect */
+.btn:active{
+    transform: scale(0.95);
 }
 
 /* Search */
@@ -79,23 +93,175 @@ nav ul li{
 .hotels{
     display:flex;
     flex-wrap:wrap;
-    gap:20px;
+    gap:30px;
 }
 
 .hotel-card{
     background:white;
     width:250px;
     padding:10px;
-    box-shadow:0 0 5px rgba(0,0,0,0.2);
+    border-radius:8px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.hotel-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
 
 .hotel-card img{
     width:100%;
     height:150px;
+    border-radius:5px;
 }
 
 .hidden{
     display:none;
+}
+.hero{
+    background:url("https://picsum.photos/1200/400?hotel") no-repeat center;
+    background-size:cover;
+    color:white;
+    text-align:center;
+    padding:100px 20px;
+    margin-bottom:20px;
+    border-radius:8px;
+    overflow:hidden;
+    
+    /* Background zoom animation */
+    animation: zoomBg 8s ease-in-out infinite alternate;
+}
+
+/* Background Zoom */
+@keyframes zoomBg{
+    from{ background-size:100%; }
+    to{ background-size:110%; }
+}
+
+/* Title animation */
+.hero-title{
+    font-size:40px;
+    opacity:0;
+    transform:translateY(-30px);
+    animation: fadeSlideDown 1s ease forwards;
+}
+
+/* Text animation */
+.hero-text{
+    font-size:20px;
+    margin-top:10px;
+    opacity:0;
+    transform:translateY(30px);
+    animation: fadeSlideUp 1.2s ease forwards;
+    animation-delay:0.5s;
+}
+
+/* Button animation */
+.hero-btn{
+    margin-top:20px;
+    padding:10px 20px;
+    border:none;
+    background:#ff3366;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+    opacity:0;
+    animation: fadeIn 1.5s ease forwards;
+    animation-delay:1s;
+    transition:0.3s;
+}
+
+.hero-btn:hover{
+    background:#e6004c;
+    transform:scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeSlideDown{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes fadeSlideUp{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes fadeIn{
+    to{ opacity:1; }
+}
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width: 768px){
+
+    /* Navbar */
+    nav{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    nav ul{
+        flex-direction:column;
+        gap:10px;
+        width:100%;
+    }
+
+    /* Hero Section */
+    .hero{
+        padding:60px 15px;
+        text-align:center;
+    }
+
+    .hero-title{
+        font-size:26px;
+    }
+
+    .hero-text{
+        font-size:16px;
+    }
+
+    /* Search Box */
+    .search-box{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .search-box input{
+        width:100%;
+    }
+
+    .search-box button{
+        width:100%;
+    }
+
+    /* Hotel Cards */
+    .hotels{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .hotel-card{
+        width:90%;
+    }
+
+    /* Login Box */
+    .login-box{
+        width:90%;
+        margin:40px auto;
+    }
+
+    /* Payment Page */
+    #paymentPage{
+        width:90%;
+    }
+
 }
 </style>
 
@@ -118,6 +284,12 @@ nav ul li{
     <span id="username"></span>
 </nav>
 
+<!-- HERO SECTION -->
+<div class="hero">
+    <h1 class="hero-title">Find Your Perfect Stay</h1>
+    <p class="hero-text">Best hotels at best prices</p>
+    <button class="hero-btn">Explore Now For Login</button>
+</div>
 <!-- LOGIN PAGE -->
 
 <div id="loginPage" class="login-box">
@@ -174,9 +346,9 @@ nav ul li{
 <script>
 /* Sample Hotels Data (cleaned) */
 let hotels = [
-{city:"Delhi", name:"Taj Hotel", price:5000, img:"https://picsum.photos/250/150?1"},
-{city:"Delhi", name:"City Inn", price:3000, img:"https://picsum.photos/250/150?2"},
-{city:"Delhi", name:"Grand Palace", price:4500, img:"https://picsum.photos/250/150?3"},
+{city:"Delhi", name:"Taj Hotel", price:5000, img:"https://www.cvent.com/venues/_next/image?url=https%3A%2F%2Fimages.cvent.com%2FCSN%2Fd79f10e1-3b76-4d31-b1de-7db32cd83c42%2Fimages%2F9e1f8afe0fce4cbf9347d8b16f8db255_LARGE!_!60e381052c8d25e8dd3025bccd87b146.jpg&w=3840&q=80"},
+{city:"Delhi", name:"City Inn", price:3000, img:"https://cf.bstatic.com/xdata/images/hotel/max1024x768/672676731.jpg?k=d12274eec0aa343f81ce23fdb5172ced82ef96b11d57aa6e67d32ee10cc71fc3&o="},
+{city:"Delhi", name:"Grand Palace", price:4500, img:"https://pix10.agoda.net/hotelImages/33925581/-1/dfaaa240f8bfef15c5d60c50dd8b4f88.jpg?ce=0&s=414x232"},
 
 {city:"Mumbai", name:"Sea View", price:4000, img:"https://picsum.photos/250/150?4"},
 {city:"Mumbai", name:"Marine Hotel", price:5500, img:"https://picsum.photos/250/150?5"},
@@ -255,19 +427,34 @@ function loadHotels(data){
 
 /* Search */
 function searchHotel(){
-    let city = document.getElementById("searchCity").value.toLowerCase();
 
-    let filtered = hotels.filter(h =>
-        h.city.toLowerCase().includes(city)
+    let input = document.getElementById("searchCity").value.trim().toLowerCase();
+
+    // If search box empty → show all hotels
+    if(input === ""){
+        loadHotels(hotels);
+        return;
+    }
+
+    let filtered = hotels.filter(h => 
+        h.city.toLowerCase().includes(input) ||
+        h.name.toLowerCase().includes(input)
     );
 
     if(filtered.length === 0){
-        document.getElementById("hotelList").innerHTML = "<h3>No hotels found</h3>";
-    }else{
+        document.getElementById("hotelList").innerHTML = 
+            "<h3 style='color:red;'>No hotels found</h3>";
+    } 
+    else{
         loadHotels(filtered);
+
+        // Show result count
+        document.getElementById("hotelList").insertAdjacentHTML(
+            "afterbegin",
+            `<p><b>${filtered.length}</b> hotel(s) found</p>`
+        );
     }
 }
-
 /* Book */
 function bookHotel(index){
     selectedHotel = hotels[index];
@@ -319,6 +506,6 @@ function loadSavedBooking(){
 }
 </script>
 <footer style="text-align:center; padding:20px; background:#ff3366; color:white;">
-    &copy; 2024 Agoda. All rights reserved.
+    &copy; 2026 Agoda. All rights reserved.
 </body>
 </html>
