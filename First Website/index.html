@@ -230,7 +230,7 @@ nav ul li{
     .search-box{
         display:flex;
         flex-direction:column;
-        gap:10px;
+        gap:20px;
     }
 
     .search-box input{
@@ -292,7 +292,7 @@ nav ul li{
 <div class="hero">
     <h1 class="hero-title">Find Your Perfect Stay</h1>
     <p class="hero-text">Best hotels at best prices</p>
-    <button class="hero-btn">🎉Explore Now🎉👉👉</button>
+    <button class="hero-btn" onclick="showPage('home')">🎉Explore Now🎉👉👉</button>
 </div>
 <!-- LOGIN PAGE -->
 
@@ -309,8 +309,17 @@ nav ul li{
 <div id="home" class="container hidden">
     <div class="search-box">
         <h3>Search Hotels</h3>
-        <input type="text" id="searchCity" placeholder="Enter City">
-        <button class="btn" onclick="searchHotel()">Search</button>
+       <input type="text" id="searchCity" placeholder="Enter City">
+
+<select id="ratingFilter">
+    <option value="">All Ratings</option>
+    <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+    <option value="4">⭐⭐⭐⭐ & above</option>
+    <option value="3">⭐⭐⭐ & above</option>
+</select>
+
+<button class="btn" onclick="searchHotel()">Search</button>
+<button class="btn" onclick="resetSearch()">Reset</button>
     </div>
     <h2>Popular Hotels</h2>
     <div class="hotels" id="hotelList"></div>
@@ -342,39 +351,82 @@ nav ul li{
 
 <div id="paymentPage" class="login-box hidden">
     <h2>Payment</h2>
-    <input type="text" placeholder="Card Number">
-    <input type="text" placeholder="Expiry Date">
-    <input type="text" placeholder="CVV">
+
+    <!-- Payment Method -->
+    <select id="paymentMethod" onchange="changePaymentMethod()">
+        <option value="card">Credit / Debit Card</option>
+        <option value="upi">UPI</option>
+        <option value="netbanking">Net Banking</option>
+        <option value="cod">Pay at Hotel</option>
+    </select>
+
+    <!-- CARD PAYMENT -->
+    <div id="cardPayment">
+        <input type="text" placeholder="Card Number">
+        <input type="text" placeholder="Expiry Date">
+        <input type="text" placeholder="CVV">
+    </div>
+
+    <!-- UPI PAYMENT -->
+    <div id="upiPayment" class="hidden">
+        <input type="text" placeholder="UPI ID (example@upi)">
+    </div>
+
+    <!-- NET BANKING -->
+    <div id="netBankingPayment" class="hidden">
+        <select>
+            <option>Select Bank</option>
+            <option>SBI</option>
+            <option>HDFC</option>
+            <option>ICICI</option>
+            <option>Axis Bank</option>
+        </select>
+    </div>
+
+    <!-- PAY AT HOTEL -->
+    <div id="codPayment" class="hidden">
+        <p style="color:green;">Pay directly at hotel during check-in.</p>
+    </div>
+
     <button class="btn" onclick="confirmPayment()">Pay Now</button>
 </div>
 <script>
 /* Sample Hotels Data (cleaned) */
 let hotels = [
-{city:"Delhi", name:"Taj Hotel", price:5000, img:"https://www.cvent.com/venues/_next/image?url=https%3A%2F%2Fimages.cvent.com%2FCSN%2Fd79f10e1-3b76-4d31-b1de-7db32cd83c42%2Fimages%2F9e1f8afe0fce4cbf9347d8b16f8db255_LARGE!_!60e381052c8d25e8dd3025bccd87b146.jpg&w=3840&q=80"},
-{city:"Delhi", name:"City Inn", price:3000, img:"https://cf.bstatic.com/xdata/images/hotel/max1024x768/672676731.jpg?k=d12274eec0aa343f81ce23fdb5172ced82ef96b11d57aa6e67d32ee10cc71fc3&o="},
-{city:"Delhi", name:"Grand Palace", price:4500, img:"https://pix10.agoda.net/hotelImages/33925581/-1/dfaaa240f8bfef15c5d60c50dd8b4f88.jpg?ce=0&s=414x232"},
-
-{city:"Mumbai", name:"Sea View", price:4000, img:"https://picsum.photos/250/150?4"},
-{city:"Mumbai", name:"Marine Hotel", price:5500, img:"https://picsum.photos/250/150?5"},
-{city:"Mumbai", name:"City Crown", price:3800, img:"https://picsum.photos/250/150?6"},
-
-{city:"Jaipur", name:"Royal Palace", price:3500, img:"https://picsum.photos/250/150?7"},
-{city:"Jaipur", name:"Pink City Hotel", price:3200, img:"https://picsum.photos/250/150?8"},
-{city:"Jaipur", name:"Heritage Stay", price:4800, img:"https://picsum.photos/250/150?9"},
-
-{city:"Goa", name:"Beach Resort", price:6000, img:"https://picsum.photos/250/150?10"},
-{city:"Goa", name:"Ocean Paradise", price:5200, img:"https://picsum.photos/250/150?11"},
-{city:"Goa", name:"Sunset Villa", price:4500, img:"https://picsum.photos/250/150?12"},
-
-{city:"Bangalore", name:"Tech Park Hotel", price:4200, img:"https://picsum.photos/250/150?13"},
-{city:"Bangalore", name:"Green Leaf Stay", price:3500, img:"https://picsum.photos/250/150?14"},
-{city:"Bangalore", name:"Royal Orchid", price:5000, img:"https://picsum.photos/250/150?15"},
-
-{city:"Chennai", name:"Beachside Inn", price:3700, img:"https://picsum.photos/250/150?16"},
-{city:"Chennai", name:"City Tower Hotel", price:4100, img:"https://picsum.photos/250/150?17"},
-{city:"Chennai", name:"Comfort Stay", price:2900, img:"https://picsum.photos/250/150?18"}
+{city:"Delhi", name:"Taj Hotel", price:5000, rating:5, img:"https://www.cvent.com/venues/_next/image?url=https%3A%2F%2Fimages.cvent.com%2FCSN%2Fd79f10e1-3b76-4d31-b1de-7db32cd83c42%2Fimages%2F9e1f8afe0fce4cbf9347d8b16f8db255_LARGE!_!60e381052c8d25e8dd3025bccd87b146.jpg&w=3840&q=80"},
+{city:"Delhi", name:"City Inn", price:3000, rating:3, img:"https://cf.bstatic.com/xdata/images/hotel/max1024x768/672676731.jpg?k=d12274eec0aa343f81ce23fdb5172ced82ef96b11d57aa6e67d32ee10cc71fc3&o="},
+{city:"Delhi", name:"Grand Palace", price:4500, rating:4, img:"https://pix10.agoda.net/hotelImages/33925581/-1/dfaaa240f8bfef15c5d60c50dd8b4f88.jpg?ce=0&s=414x232"},
+{city:"Mumbai", name:"Sea View", price:4000, rating:4, img:"https://picsum.photos/250/150?4"},
+{city:"Mumbai", name:"Marine Hotel", price:5500, rating:5, img:"https://picsum.photos/250/150?5"},
+{city:"Mumbai", name:"City Crown", price:3800, rating:3, img:"https://picsum.photos/250/150?6"},
+{city:"Jaipur", name:"Royal Palace", price:3500, rating:4, img:"https://picsum.photos/250/150?7"},
+{city:"Jaipur", name:"Pink City Hotel", price:3200, rating:3, img:"https://picsum.photos/250/150?8"},
+{city:"Jaipur", name:"Heritage Stay", price:4800, rating:5, img:"https://picsum.photos/250/150?9"},
+{city:"Goa", name:"Beach Resort", price:6000, rating:5, img:"https://picsum.photos/250/150?10"},
+{city:"Goa", name:"Ocean Paradise", price:5200, rating:4, img:"https://picsum.photos/250/150?11"},
+{city:"Goa", name:"Sunset Villa", price:4500, rating:4, img:"https://picsum.photos/250/150?12"},
+{city:"Bangalore", name:"Tech Park Hotel", price:4200, rating:4, img:"https://picsum.photos/250/150?13"},
+{city:"Bangalore", name:"Green Leaf Stay", price:3500, rating:3, img:"https://picsum.photos/250/150?14"},
+{city:"Bangalore", name:"Royal Orchid", price:5000, rating:5, img:"https://picsum.photos/250/150?15"},
+{city:"Chennai", name:"Beachside Inn", price:3700, rating:4, img:"https://picsum.photos/250/150?16"},
+{city:"Chennai", name:"City Tower Hotel", price:4100, rating:4, img:"https://picsum.photos/250/150?17"},
+{city:"Chennai", name:"Comfort Stay", price:2900, rating:3, img:"https://picsum.photos/250/150?18"},
+{city:"Kolkata", name:"Howrah Heritage", price:3600, rating:4, img:"https://picsum.photos/250/150?19"},
+{city:"Kolkata", name:"City Palace Inn", price:2800, rating:3, img:"https://picsum.photos/250/150?20"},
+{city:"Kolkata", name:"Royal Bengal Stay", price:5200, rating:5, img:"https://picsum.photos/250/150?21"},
+{city:"Hyderabad", name:"Charminar View Hotel", price:3900, rating:4, img:"https://picsum.photos/250/150?22"},
+{city:"Hyderabad", name:"Tech City Suites", price:4500, rating:5, img:"https://picsum.photos/250/150?23"},
+{city:"Hyderabad", name:"Budget Comfort Inn", price:2600, rating:3, img:"https://picsum.photos/250/150?24"},
+{city:"Pune", name:"City Central Hotel", price:3400, rating:4, img:"https://picsum.photos/250/150?25"},
+{city:"Pune", name:"IT Park Residency", price:4200, rating:5, img:"https://picsum.photos/250/150?26"},
+{city:"Pune", name:"Green Valley Stay", price:3000, rating:3, img:"https://picsum.photos/250/150?27"},
+{city:"Ahmedabad", name:"Riverfront Hotel", price:3800, rating:4, img:"https://picsum.photos/250/150?28"},
+{city:"Ahmedabad", name:"Heritage Haveli", price:4600, rating:5, img:"https://picsum.photos/250/150?29"},
+{city:"Ahmedabad", name:"Comfort Lodge", price:2700, rating:3, img:"https://picsum.photos/250/150?30"},
+{city:"Indore", name:"Central Park Hotel", price:3200, rating:4, img:"https://picsum.photos/250/150?31"},
+{city:"Indore", name:"Business Class Inn", price:4100, rating:5, img:"https://picsum.photos/250/150?32"},
+{city:"Indore", name:"Economy Stay", price:2500, rating:3, img:"https://picsum.photos/250/150?33"}
 ];
-
 let selectedHotel = null;
 
 /* Login */
@@ -391,6 +443,7 @@ function login(){
 
     showPage("home");
     loadHotels(hotels);
+    loadSavedBooking();
 }
 
 /* Logout */
@@ -432,32 +485,38 @@ function loadHotels(data){
 /* Search */
 function searchHotel(){
 
-    let input = document.getElementById("searchCity").value.trim().toLowerCase();
+    let cityInput = document.getElementById("searchCity").value.trim().toLowerCase();
+    let ratingInput = document.getElementById("ratingFilter").value;
 
-    // If search box empty → show all hotels
-    if(input === ""){
-        loadHotels(hotels);
-        return;
-    }
+    let filtered = hotels.filter(h => {
 
-    let filtered = hotels.filter(h => 
-        h.city.toLowerCase().includes(input) ||
-        h.name.toLowerCase().includes(input)
-    );
+        let cityMatch =
+            cityInput === "" ||
+            h.city.toLowerCase().includes(cityInput) ||
+            h.name.toLowerCase().includes(cityInput);
+
+        let ratingMatch =
+            ratingInput === "" || h.rating >= ratingInput;
+
+        return cityMatch && ratingMatch;
+    });
 
     if(filtered.length === 0){
-        document.getElementById("hotelList").innerHTML = 
+        document.getElementById("hotelList").innerHTML =
             "<h3 style='color:red;'>No hotels found</h3>";
-    } 
-    else{
+    } else {
         loadHotels(filtered);
 
-        // Show result count
         document.getElementById("hotelList").insertAdjacentHTML(
             "afterbegin",
             `<p><b>${filtered.length}</b> hotel(s) found</p>`
         );
     }
+}
+function resetSearch(){
+    document.getElementById("searchCity").value = "";
+    document.getElementById("ratingFilter").value = "";
+    loadHotels(hotels);
 }
 /* Book */
 function bookHotel(index){
@@ -474,11 +533,28 @@ function bookHotel(index){
 }
 
 /* Payment */
-function confirmPayment(){
-    if(!selectedHotel){
-        alert("No hotel selected");
-        return;
+function changePaymentMethod(){
+
+    let method = document.getElementById("paymentMethod").value;
+
+    document.getElementById("cardPayment").classList.add("hidden");
+    document.getElementById("upiPayment").classList.add("hidden");
+    document.getElementById("netBankingPayment").classList.add("hidden");
+    document.getElementById("codPayment").classList.add("hidden");
+
+    if(method === "card"){
+        document.getElementById("cardPayment").classList.remove("hidden");
     }
+    else if(method === "upi"){
+        document.getElementById("upiPayment").classList.remove("hidden");
+    }
+    else if(method === "netbanking"){
+        document.getElementById("netBankingPayment").classList.remove("hidden");
+    }
+    else if(method === "cod"){
+        document.getElementById("codPayment").classList.remove("hidden");
+    }
+}
 
     // Save booking in localStorage (like real website)
     localStorage.setItem("booking", JSON.stringify(selectedHotel));
@@ -494,6 +570,33 @@ function confirmPayment(){
 
     alert("Booking Confirmed!");
     showPage("booking");
+  //  confirmPayment()
+  function confirmPayment(){
+
+    if(!selectedHotel){
+        alert("No hotel selected");
+        return;
+    }
+
+    let method = document.getElementById("paymentMethod").value;
+
+    localStorage.setItem("booking", JSON.stringify({
+        ...selectedHotel,
+        paymentMethod: method
+    }));
+
+    document.getElementById("paymentPage").classList.add("hidden");
+
+    document.getElementById("bookingDetails").innerHTML = `
+        <h3>${selectedHotel.name}</h3>
+        <p>City: ${selectedHotel.city}</p>
+        <p>Price: ₹${selectedHotel.price}</p>
+        <p>Payment Method: <b>${method.toUpperCase()}</b></p>
+        <p style="color:green;">Payment Successful</p>
+    `;
+
+    alert("Booking Confirmed!");
+    showPage("booking");
 }
 // Load saved booking on login
 function loadSavedBooking(){
@@ -503,6 +606,7 @@ function loadSavedBooking(){
         document.getElementById("bookingDetails").innerHTML = `
             <h3>${hotel.name}</h3>
             <p>City: ${hotel.city}</p>
+            <p>Rating: ⭐ ${hotel.rating}</p>
             <p>Price: ₹${hotel.price}</p>
             <p style="color:green;">Booking Saved</p>
         `;
