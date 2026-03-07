@@ -429,6 +429,27 @@ let hotels = [
 ];
 let selectedHotel = null;
 
+// Hero Image Slider
+let heroImages = [
+    "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+    "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
+    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
+    "https://images.unsplash.com/photo-1590490360182-c33d57733427"
+];
+
+let heroIndex = 0;
+let heroSection = document.querySelector(".hero");
+
+function changeHeroImage(){
+    heroSection.style.backgroundImage = 
+        `url(${heroImages[heroIndex]})`;
+
+     heroIndex = (heroIndex + 1) % heroImages.length; 
+}
+
+changeHeroImage();
+setInterval(changeHeroImage, 4000);
+
 /* Login */
 function login(){
     let user = document.getElementById("user").value;
@@ -617,3 +638,5 @@ function loadSavedBooking(){
     &copy; 2026 Agoda. All rights reserved.
 </body>
 </html>
+
+
