@@ -4,48 +4,368 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Musical Player App</title>
+    <style>
+    :root{
+    --bg: #020617;
+    --glass: rgba(255,255,255,0.05);
+    --accent: #1db954;
+    --white: #e6eef6;
+    --muted: #9aa4b2;
+    font-family: Inter, system-ui, Arial;
+}
+
+/* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#020617,#002252);
+    color:var(--white);
+}
+
+/* Main Layout */
+.card{
+    display:flex;
+    width:1000px;
+    height:550px;
+    backdrop-filter: blur(20px);
+    background: var(--glass);
+    border-radius:20px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+/* Sidebar Playlist */
+.playlist{
+    width:300px;
+    background: rgba(0,0,0,0.4);
+    padding:20px;
+    overflow-y:auto;
+}
+
+.playlist h2{
+    margin-bottom:15px;
+}
+
+.song{
+    padding:10px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-bottom:10px;
+    transition:0.3s;
+}
+
+.song:hover{
+    background: rgba(255,255,255,0.1);
+}
+
+.song.active{
+    background: var(--accent);
+}
+
+/* Player Section */
+.player{
+    flex:1;
+    padding:30px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Cover */
+.cover{
+    width:200px;
+    height:200px;
+    border-radius:15px;
+    object-fit:cover;
+    margin-bottom:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Title */
+.title{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.artist{
+    color:var(--muted);
+    margin-bottom:20px;
+}
+
+/* Animated Progress Bar */
+.progress-container{
+    width:100%;
+    height:8px;
+    background: rgba(255,255,255,0.1);
+    border-radius:10px;
+    cursor:pointer;
+    overflow:hidden;
+    margin:15px 0;
+}
+
+.progress{
+    height:100%;
+    width:0%;
+    background: linear-gradient(90deg,#1db954,#1ed760);
+    border-radius:10px;
+    transition: width 0.2s linear;
+}
+
+/* Time */
+.time{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:var(--muted);
+}
+
+/* Controls */
+.controls{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+}
+
+.btn{
+    background: rgba(255,255,255,0.1);
+    border:none;
+    padding:12px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background: var(--accent);
+}
+
+/* Play Button */
+#playBtn{
+    background: var(--accent);
+    color:black;
+}
+
+/* Volume */
+.vol{
+    margin-top:15px;
+}
+
+#volume{
+    width:150px;
+}
+
+</style>
 </head>
 <body>
-    <main class="card" role="main" aria-labelledby="tittle">
-        <header class="top">
-            <div>
-                <h1 id="tittle">Day 20 : Musical Player App</h1>
-                <p class="lead">Mini music player demonstration the Audio API, event listeners and state management.</p>
-            </div>
-        </header>
+   <div class="card">
 
-        <section class="player">
-            <div class="now-playing">
-                <img id="cover" class="cover" src="https:/picsum.photos/300?random=10" alt="Album art"/>
-                <div class="meta">
-                    <div id="trackTittle" class="tittle">Track Title</div>
-                    <div id="trackArtist" class="artist">Artist</div>
+    <!-- Playlist Sidebar -->
+    <div class="playlist" id="playlist">
+        <h2>Playlist</h2>
+    </div>
 
-                    <div class="progress-wrap" aria-label="Track progress">
-                        <div id="progressContainer" class="progress-container" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" ariavaluenow="0"></div>
-                        <div id="progress" class="progress"></div>
-                    </div>
-                    <div class="time-row">
-                        <span id="currentTime">0:00</span>
-                        <span id="duration">0:00</span>
-                    </div>
-                </div>
-                 
-                <div class="controls">
-                    <button id="prevBtn" class="btn" title="Previous(Arrow Left)">⏮</button>
-                    <button id="playBtn" class="btn" title="Play/Pause(Space)">▶</button>
-                    <button id="nextBtn" class="btn" title="Next(Arrow Right)">⏭</button>
+    <!-- Player -->
+    <div class="player">
+        <img id="cover" class="cover" src="" />
 
-                    <button id="ShuffleBtn" class="btn" title="Shuffle">🔀</button>
-                    <button id="repeatBtn" class="btn" title="Repeat">🔁</button>
+        <div id="trackTitle" class="title">Title</div>
+        <div id="trackArtist" class="artist">Artist</div>
 
-                    <div class="vol">
-                        <button id="muteBtn" class="btn" title="Mute">🔇</button>
-                        <input id="volume" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume"/>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+        <div class="progress-container" id="progressContainer">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <div class="time">
+            <span id="currentTime">0:00</span>
+            <span id="duration">0:00</span>
+        </div>
+
+        <div class="controls">
+            <button id="prevBtn" class="btn">⏮</button>
+            <button id="playBtn" class="btn">▶</button>
+            <button id="nextBtn" class="btn">⏭</button>
+        </div>
+
+        <div class="vol">
+            <input id="volume" type="range" min="0" max="1" step="0.01" value="0.8">
+        </div>
+    </div>
+</div>
+        <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+<script>
+const tracks = [
+  {
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    title: "SoundHelix Song 1",
+    artist: "Helix Studio",
+    cover: "https://picsum.photos/200?random=11"
+  },
+  {
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+    title: "SoundHelix Song 2",
+    artist: "Helix Studio",
+    cover: "https://picsum.photos/200?random=12"
+  },
+  {
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+    title: "SoundHelix Song 3",
+    artist: "Helix Studio",
+    cover: "https://picsum.photos/200?random=13"
+  },
+  {
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+    title: "SoundHelix Song 4",
+    artist: "Helix Studio",
+    cover: "https://picsum.photos/200?random=14"
+  },
+  {
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+    title: "SoundHelix Song 5",
+    artist: "Helix Studio",
+    cover: "https://picsum.photos/200?random=15"
+  },
+    {
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    title: "Kesariya",
+    artist: "Arijit Singh",
+    cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4"
+  },
+  {
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+    title: "Tum Hi Ho",
+    artist: "Arijit Singh",
+    cover: "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2"
+  },
+  {
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+    title: "Raataan Lambiyan",
+    artist: "Jubin Nautiyal",
+    cover: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f"
+  },
+  {
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+    title: "Apna Bana Le",
+    artist: "Arijit Singh",
+    cover: "https://images.unsplash.com/photo-1511379938547-c1f69419868d"
+  },
+  {
+    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+    title: "Kalank Title Track",
+    artist: "Arijit Singh",
+    cover: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
+  }
+];
+
+let index = 0;
+const audio = new Audio();
+
+// Elements
+const playlistEl = document.getElementById("playlist");
+const playBtn = document.getElementById("playBtn");
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
+
+const cover = document.getElementById("cover");
+const title = document.getElementById("trackTitle");
+const artist = document.getElementById("trackArtist");
+
+const progress = document.getElementById("progress");
+const progressContainer = document.getElementById("progressContainer");
+
+const currentTimeEl = document.getElementById("currentTime");
+const durationEl = document.getElementById("duration");
+
+const volume = document.getElementById("volume");
+
+// Load track
+function loadTrack(i){
+    const t = tracks[i];
+    audio.src = t.src;
+    title.textContent = t.title;
+    artist.textContent = t.artist;
+    cover.src = t.cover;
+
+    document.querySelectorAll(".song").forEach(s => s.classList.remove("active"));
+    document.querySelectorAll(".song")[i].classList.add("active");
+}
+
+// Playlist UI
+tracks.forEach((t,i)=>{
+    const div = document.createElement("div");
+    div.classList.add("song");
+    div.textContent = t.title;
+    div.onclick = ()=>{
+        index = i;
+        loadTrack(index);
+        audio.play();
+    };
+    playlistEl.appendChild(div);
+});
+
+// Controls
+playBtn.onclick = ()=>{
+    if(audio.paused){
+        audio.play();
+        playBtn.textContent = "⏸";
+    } else {
+        audio.pause();
+        playBtn.textContent = "▶";
+    }
+};
+
+nextBtn.onclick = ()=>{
+    index = (index+1)%tracks.length;
+    loadTrack(index);
+    audio.play();
+};
+
+prevBtn.onclick = ()=>{
+    index = (index-1+tracks.length)%tracks.length;
+    loadTrack(index);
+    audio.play();
+};
+
+// Progress Animation
+audio.addEventListener("timeupdate", ()=>{
+    const percent = (audio.currentTime/audio.duration)*100;
+    progress.style.width = percent + "%";
+
+    currentTimeEl.textContent = format(audio.currentTime);
+    durationEl.textContent = format(audio.duration);
+});
+
+// Click Seek
+progressContainer.onclick = (e)=>{
+    const w = progressContainer.clientWidth;
+    audio.currentTime = (e.offsetX/w)*audio.duration;
+};
+
+// Volume
+volume.oninput = ()=>{
+    audio.volume = volume.value;
+};
+
+// Format time
+function format(t){
+    if(isNaN(t)) return "0:00";
+    let m = Math.floor(t/60);
+    let s = Math.floor(t%60);
+    return m + ":" + (s<10?"0":"") + s;
+}
+
+loadTrack(index);
+</script>
 </body>
 </html>
