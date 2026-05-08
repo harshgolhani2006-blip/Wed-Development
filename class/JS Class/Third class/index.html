@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Basic Hoisting</title>
+</head>
+<style>
+    body{
+             background-color: gray;
+    }
+    h1{
+        align-items: center;
+        size: 100px;
+        color: blue;
+        text-align: center;
+    }
+</style>
+<body>
+    <h1>This is the method of array</h1>
+    <script>
+        //Hoisting.
+        //For Var.
+       // console.log(a) //undefined
+      //  var a=5
+        //After Run.
+      //  var a
+       // console.log(a)
+      //  a=56
+
+      //For Let
+      //console.log(a)
+      //let a=5   // Give error a is not access before initialization.
+      
+      //let a
+      //console.log(a)  // undefined
+      //a=5
+
+     // sum()
+     // var sum=()=>{
+       // console.log("Hello")   //Give error sum is not a function.
+     // }
+
+     // sum()
+     // let sum=()=>{
+      //  console.log("hello")  // Give erro is not a access before initialization.
+    //  }
+
+    // Method of Array.
+  //  let arr=[1,2,3,4,5,5]
+   // console.log(arr.length)  // cal length
+   // arr.push(10)
+   // console.log(arr,"Push")  // add from last element 
+   // arr.pop()
+  //  console.log(arr,"Pop")  // remove from last element 
+  //  arr.unshift(0)
+  //  console.log(arr,"Unshift")  // Add from first element  
+  //  arr.shift()
+  //  console.log(arr,"Shift")  // remove  from first element 
+ //  arr.includes(5)
+  //  console.log(arr.includes(5),"Searching")  // search
+  //  console.log(arr.indexOf(5),"Print element")  // print element acc to index.
+
+    //important method
+   //let data= arr.find(function(a){
+      //  return a==5
+   // })
+//  console.log(data,"only print single element ")  // it is not depent multiple.
+
+ //let data = arr.find((a)=>{
+  //  return a==5
+//}) 
+//console.log(data,"")
+//arr.forEach((a,b,c)=>{
+  //  console.log(a,"ForEach") // print arr value.
+ //   console.log(b,"ForEach")  // print arr index.
+  //  console.log(c,"ForEach")  // print complete array.
+// })
+   
+ //arr.map((a,b,c)=>{
+ //   console.log(a); // print value
+  //  console.log(b); // print index.
+  //  console.log(c);  // print array   // it not pass condition
+  //}) 
+
+ // let arr1=arr.map((a,b,c)=>{
+   // return a
+   // return b
+   // return c
+ // })
+ // console.log(arr1)  
+  
+ //let ar1=arr.map((a,b,c)=>{
+  //  return a*2
+// })
+// console.log(ar1)
+ //let arr1=arr.filter((a,b,c)=>{
+  //  return a>2
+// })
+// console.log(arr1)
+
+// Reduces
+// let sum=arr.reduce((a,b,c,d)=>{
+ //   console.log(a,"Me a hu")
+ //   console.log(b,"Me b hu")
+ //   return a+b
+// }) 
+//console.log(sum,"sum of array")
+
+  let arr=[1,2,3,5,53,6,3,6,3,345,2]
+ let arr1= arr.filter((a,b,c)=>{
+    return a>2
+  })
+  console.log(arr1)
+  let arr2=arr.filter((a,b,c)=>{
+        return a%2
+    })
+    console.log(arr2)
+    </script>
+</body>
+</html>

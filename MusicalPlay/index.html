@@ -16,7 +16,6 @@
     --muted:#94a3b8;
 }
 
-/* RESET */
 *{
     margin:0;
     padding:0;
@@ -34,7 +33,6 @@ body{
     align-items:center;
 }
 
-/* MAIN PLAYER */
 .player-app{
     width:1000px;
     height:600px;
@@ -46,7 +44,6 @@ body{
     border:1px solid rgba(255,255,255,0.1);
 }
 
-/* TOP BAR */
 .topbar{
     height:70px;
     display:flex;
@@ -56,12 +53,19 @@ body{
     border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
+.top-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
 .logo{
     font-size:22px;
     font-weight:bold;
 }
 
-.menu-btn{
+.menu-btn,
+.back-btn{
     width:45px;
     height:45px;
     border:none;
@@ -73,12 +77,12 @@ body{
     transition:0.3s;
 }
 
-.menu-btn:hover{
+.menu-btn:hover,
+.back-btn:hover{
     background:var(--accent);
     color:black;
 }
 
-/* PLAYER SECTION */
 .player{
     height:calc(100% - 70px);
     display:flex;
@@ -88,14 +92,12 @@ body{
     padding:20px;
 }
 
-/* COVER */
 .cover{
     width:250px;
     height:250px;
     object-fit:cover;
     border-radius:20px;
     box-shadow:0 10px 30px rgba(0,0,0,0.5);
-
     animation:spin 8s linear infinite;
     animation-play-state:paused;
 }
@@ -113,7 +115,6 @@ body{
     }
 }
 
-/* TEXT */
 .title{
     margin-top:25px;
     font-size:28px;
@@ -125,7 +126,6 @@ body{
     color:var(--muted);
 }
 
-/* PROGRESS */
 .progress-container{
     width:80%;
     height:8px;
@@ -140,9 +140,9 @@ body{
     width:0%;
     height:100%;
     background:linear-gradient(90deg,#1db954,#1ed760);
+    transition:width 0.1s linear;
 }
 
-/* TIME */
 .time{
     width:80%;
     display:flex;
@@ -152,7 +152,6 @@ body{
     color:var(--muted);
 }
 
-/* CONTROLS */
 .controls{
     display:flex;
     gap:20px;
@@ -182,7 +181,6 @@ body{
     color:black;
 }
 
-/* VOLUME */
 .vol{
     margin-top:25px;
 }
@@ -191,7 +189,6 @@ body{
     width:220px;
 }
 
-/* PLAYLIST SIDEBAR */
 .sidebar{
     position:absolute;
     top:0;
@@ -210,12 +207,29 @@ body{
     right:0;
 }
 
-/* PLAYLIST TITLE */
 .sidebar h2{
     margin-bottom:20px;
 }
 
-/* ADD BUTTON */
+.sidebar::-webkit-scrollbar{
+    width:6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+    background:var(--accent);
+    border-radius:10px;
+}
+
+.search-box{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-bottom:15px;
+    background:rgba(255,255,255,0.08);
+    color:white;
+}
+
 #addSongBtn{
     width:100%;
     padding:12px;
@@ -228,7 +242,6 @@ body{
     margin-bottom:20px;
 }
 
-/* SONG ITEM */
 .song{
     display:flex;
     align-items:center;
@@ -263,15 +276,28 @@ body{
     object-fit:cover;
 }
 
-.remove-btn{
+.remove-btn,
+.fav-btn{
     border:none;
     background:none;
-    color:red;
-    font-size:16px;
     cursor:pointer;
+    font-size:18px;
 }
 
-/* MOBILE */
+#toast{
+    position:absolute;
+    bottom:20px;
+    right:20px;
+    background:var(--accent);
+    color:black;
+    padding:12px 20px;
+    border-radius:12px;
+    opacity:0;
+    transition:0.3s;
+    font-weight:bold;
+    z-index:999;
+}
+
 @media(max-width:850px){
 
     .player-app{
@@ -283,30 +309,15 @@ body{
         width:100%;
         right:-100%;
     }
-}
 
-.top-left{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
+    .cover{
+        width:200px;
+        height:200px;
+    }
 
-/* BACK BUTTON */
-.back-btn{
-    width:42px;
-    height:42px;
-    border:none;
-    border-radius:10px;
-    background:rgba(255,255,255,0.08);
-    color:white;
-    cursor:pointer;
-    font-size:20px;
-    transition:0.3s;
-}
-
-.back-btn:hover{
-    background:var(--accent);
-    color:black;
+    .title{
+        font-size:22px;
+    }
 }
 
 </style>
@@ -315,486 +326,856 @@ body{
 
 <div class="player-app">
 
-    <!-- TOPBAR -->
-   <div class="topbar">
+<div class="topbar">
 
-    <div class="top-left">
+<div class="top-left">
 
-        <button class="back-btn" id="backBtn">
-            ←
-        </button>
+<button class="back-btn" id="backBtn">
+←
+</button>
 
-        <div class="logo">
-            🎵 Music Player
-        </div>
-
-    </div>
-
-    <button class="menu-btn" id="menuBtn">
-        ☰
-    </button>
+<div class="logo">
+🎵 Music Player
+</div>
 
 </div>
 
-    <!-- PLAYER -->
-    <div class="player">
+<button class="menu-btn" id="menuBtn">
+☰
+</button>
 
-        <img id="cover"
-        class="cover"
-        src="https://picsum.photos/300">
+</div>
 
-        <div id="trackTitle" class="title">
-            No Song
-        </div>
+<div class="player">
 
-        <div id="trackArtist" class="artist">
-            Artist
-        </div>
+<img id="cover"
+class="cover"
+src="https://picsum.photos/300">
 
-        <!-- PROGRESS -->
-        <div class="progress-container"
-        id="progressContainer">
+<div id="trackTitle" class="title">
+No Song
+</div>
 
-            <div class="progress"
-            id="progress"></div>
+<div id="trackArtist" class="artist">
+Artist
+</div>
 
-        </div>
+<div class="progress-container"
+id="progressContainer">
 
-        <!-- TIME -->
-        <div class="time">
+<div class="progress"
+id="progress"></div>
 
-            <span id="currentTime">
-                0:00
-            </span>
+</div>
 
-            <span id="duration">
-                0:00
-            </span>
+<div class="time">
 
-        </div>
+<span id="currentTime">
+0:00
+</span>
 
-        <!-- CONTROLS -->
-        <div class="controls">
+<span id="duration">
+0:00
+</span>
 
-            <button id="prevBtn"
-            class="btn">
-                ⏮
-            </button>
+</div>
 
-            <button id="playBtn"
-            class="btn">
-                ▶
-            </button>
+<div class="controls">
 
-            <button id="nextBtn"
-            class="btn">
-                ⏭
-            </button>
+<button id="prevBtn"
+class="btn">
+⏮
+</button>
 
-        </div>
+<button id="playBtn"
+class="btn">
+▶
+</button>
 
-        <!-- VOLUME -->
-        <div class="vol">
+<button id="nextBtn"
+class="btn">
+⏭
+</button>
 
-            <input type="range"
-            id="volume"
-            min="0"
-            max="1"
-            step="0.01"
-            value="0.8">
+</div>
 
-        </div>
+<div class="vol">
 
-    </div>
+<input type="range"
+id="volume"
+min="0"
+max="1"
+step="0.01"
+value="0.8">
 
-    <!-- SIDEBAR PLAYLIST -->
-    <div class="sidebar" id="sidebar">
+</div>
 
-        <h2>
-            🎶 Playlist
-        </h2>
+</div>
 
-        <input type="file"
-        id="fileInput"
-        accept="audio/*"
-        multiple
-        hidden>
+<div class="sidebar" id="sidebar">
 
-        <button id="addSongBtn">
-            + Add Songs
-        </button>
+<h2>
+🎶 Playlist
+</h2>
 
-        <div id="playlist"></div>
+<input
+type="text"
+id="searchSong"
+placeholder="Search songs..."
+class="search-box">
 
-    </div>
+<input type="file"
+id="fileInput"
+accept="audio/*"
+multiple
+hidden>
+
+<button id="addSongBtn">
++ Add Songs
+</button>
+
+<div id="playlist"></div>
+
+</div>
+
+<div id="toast"></div>
 
 </div>
 
 <script>
 
-/* SONGS */
 const tracks = [
-  {
-    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-    title: "SoundHelix Song 1",
-    artist: "Helix Studio",
-    cover: "https://picsum.photos/200?random=11"
-  },
 
-  // 🎵 Real Bollywood (Use YouTube links instead of fake mp3)
-  {
-  src:"Song/kesariya.mp3",
-  title: "Kesariya",
-  artist: "Arijit Singh",
-  cover: "https://img.youtube.com/vi/BddP6PYo2gs/0.jpg"
+{
+src:"Song/kesariya.mp3",
+title:"Kesariya",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/BddP6PYo2gs/0.jpg"
 },
-  {
-    src:"Song/Tum Hi Ho.mp3",
-    title: "Tum Hi Ho",
-    artist: "Arijit Singh",
-    cover: "https://img.youtube.com/vi/Umqb9KENgmk/0.jpg"
-  },
-  {
-    src:"Song/Raataan Lambiyan.mp3",
-    title: "Raataan Lambiyan",
-    artist: "Jubin Nautiyal",
-    cover: "https://img.youtube.com/vi/gvyUuxdRdR4/0.jpg"
-  },
-  {
-    src:"Song/Apna Bana Le.mp3",
-    title: "Apna Bana Le",
-    artist: "Arijit Singh",
-    cover: "https://img.youtube.com/vi/ElZfdU54Cp8/0.jpg"
-  },
-  {
-    src: "https://www.jiosaavn.com/song/roke-na-ruke-naina/JSARfRUGTl0",
-    title: "Kalank ",
-    artist: "Arijit Singh",
-    cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzWv3v3ysxwvZ6VWMxORyJ0rEDkhDExZRT9Q&s"
-  }
-];
 
-/* VARIABLES */
+{
+src:"Song/Tum Hi Ho.mp3",
+title:"Tum Hi Ho",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/Umqb9KENgmk/0.jpg"
+},
+
+{
+src:"Song/Raataan Lambiyan.mp3",
+title:"Raataan Lambiyan",
+artist:"Jubin Nautiyal",
+cover:"https://img.youtube.com/vi/gvyUuxdRdR4/0.jpg"
+},
+
+{
+src:"Song/Apna Bana Le.mp3",
+title:"Apna Bana Le",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/ElZfdU54Cp8/0.jpg"
+},
+
+{
+src:"Song/Heeriye.mp3",
+title:"Heeriye",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/RLzC55ai0eo/0.jpg"
+},
+
+{
+src:"Song/Satranga.mp3",
+title:"Satranga",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/HrnrqYxYrbk/0.jpg"
+},
+
+{
+src:"Song/O Maahi.mp3",
+title:"O Maahi",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/1vOVl7RNJtY/0.jpg"
+},
+
+{
+src:"Song/Chaleya.mp3",
+title:"Chaleya",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/VAdGW7QDJiU/0.jpg"
+},
+
+{
+src:"Song/Tere Vaaste.mp3",
+title:"Tere Vaaste",
+artist:"Varun Jain",
+cover:"https://img.youtube.com/vi/7c3-Gei5j4w/0.jpg"
+},
+
+{
+src:"Song/Kalank.mp3",
+title:"Kalank",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/Grr0FlC8SQA/0.jpg"
+},
+
+{
+src:"Song/Shayad.mp3",
+title:"Shayad",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/MJyKN-8UncM/0.jpg"
+},
+
+{
+src:"Song/Tujhe Kitna Chahne Lage.mp3",
+title:"Tujhe Kitna Chahne Lage",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/BQdzsSqA-CQ/0.jpg"
+},
+
+{
+src:"Song/Phir Aur Kya Chahiye.mp3",
+title:"Phir Aur Kya Chahiye",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/8sLS2knUa6Y/0.jpg"
+},
+
+{
+src:"Song/Pehle Bhi Main.mp3",
+title:"Pehle Bhi Main",
+artist:"Vishal Mishra",
+cover:"https://img.youtube.com/vi/_VuJA-VQRcY/0.jpg"
+},
+{
+src:"Song/Husn.mp3",
+title:"Husn",
+artist:"Anuv Jain",
+cover:"https://img.youtube.com/vi/gJLVTKhTnog/0.jpg"
+},
+
+{
+src:"Song/Jo Tum Mere Ho.mp3",
+title:"Jo Tum Mere Ho",
+artist:"Anuv Jain",
+cover:"https://img.youtube.com/vi/ilNt2bikxDI/0.jpg"
+},
+
+{
+src:"Song/Sajni.mp3",
+title:"Sajni",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/k3g_WjLCsXM/0.jpg"
+},
+
+{
+src:"Song/Soulmate.mp3",
+title:"Soulmate",
+artist:"Badshah & Arijit Singh",
+cover:"https://img.youtube.com/vi/VuG7ge_8I2Y/0.jpg"
+},
+
+{
+src:"Song/Ve Kamleya.mp3",
+title:"Ve Kamleya",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/U47Tr9BB_wE/0.jpg"
+},
+
+{
+src:"Song/Jhoome Jo Pathaan.mp3",
+title:"Jhoome Jo Pathaan",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/YxWlaYCA8MU/0.jpg"
+},
+
+{
+src:"Song/Bekhayali.mp3",
+title:"Bekhayali",
+artist:"Sachet Tandon",
+cover:"https://img.youtube.com/vi/VOLKJJvfAbg/0.jpg"
+},
+
+{
+src:"Song/Kaise Hua.mp3",
+title:"Kaise Hua",
+artist:"Vishal Mishra",
+cover:"https://img.youtube.com/vi/WWXm39leYew/0.jpg"
+},
+
+{
+src:"Song/Pal Pal Dil Ke Paas.mp3",
+title:"Pal Pal Dil Ke Paas",
+artist:"Arijit Singh",
+cover:"https://img.youtube.com/vi/lgTHGZF3BQw/0.jpg"
+},
+
+{
+src:"Song/Maan Meri Jaan.mp3",
+title:"Maan Meri Jaan",
+artist:"King",
+cover:"https://img.youtube.com/vi/VuG7ge_8I2Y/0.jpg"
+},
+
+{
+src:"Song/Despacito.mp3",
+title:"Despacito",
+artist:"Luis Fonsi",
+cover:"https://img.youtube.com/vi/kJQP7kiw5Fk/0.jpg"
+},
+
+{
+src:"Song/Perfect.mp3",
+title:"Perfect",
+artist:"Ed Sheeran",
+cover:"https://img.youtube.com/vi/2Vv-BfVoq4g/0.jpg"
+},
+
+{
+src:"Song/Shape of You.mp3",
+title:"Shape of You",
+artist:"Ed Sheeran",
+cover:"https://img.youtube.com/vi/JGwWNGJdvx8/0.jpg"
+},
+
+{
+src:"Song/Believer.mp3",
+title:"Believer",
+artist:"Imagine Dragons",
+cover:"https://img.youtube.com/vi/7wtfhZwyrcc/0.jpg"
+},
+
+{
+src:"Song/Faded.mp3",
+title:"Faded",
+artist:"Alan Walker",
+cover:"https://img.youtube.com/vi/60ItHLz5WEA/0.jpg"
+},
+
+{
+src:"Song/Let Me Down Slowly.mp3",
+title:"Let Me Down Slowly",
+artist:"Alec Benjamin",
+cover:"https://img.youtube.com/vi/50VNCymT-Cs/0.jpg"
+},
+
+{
+src:"Song/Until I Found You.mp3",
+title:"Until I Found You",
+artist:"Stephen Sanchez",
+cover:"https://img.youtube.com/vi/GxldQ9eX2wo/0.jpg"
+},
+
+{
+src:"Song/Starboy.mp3",
+title:"Starboy",
+artist:"The Weeknd",
+cover:"https://img.youtube.com/vi/34Na4j8AVgA/0.jpg"
+},
+
+{
+src:"Song/Blinding Lights.mp3",
+title:"Blinding Lights",
+artist:"The Weeknd",
+cover:"https://img.youtube.com/vi/4NRXx6U8ABQ/0.jpg"
+},
+
+{
+src:"Song/Closer.mp3",
+title:"Closer",
+artist:"Chainsmokers",
+cover:"https://img.youtube.com/vi/PT2_F-1esPk/0.jpg"
+},
+{
+src:"Song/Agar Tum Saath Ho.mp3",
+title:"Agar Tum Saath Ho",
+artist:"Alka Yagnik",
+cover:"https://img.youtube.com/vi/sK7riqg2mr4/0.jpg"
+}
+
+];
+const savedTracks =
+JSON.parse(localStorage.getItem("tracks"));
+
+if(savedTracks){
+
+savedTracks.forEach(song=>{
+
+tracks.push(song);
+
+});
+
+}
+
 let index = 0;
 
 const audio = new Audio();
 audio.volume = 0.8;
 
-/* ELEMENTS */
 const sidebar = document.getElementById("sidebar");
 const menuBtn = document.getElementById("menuBtn");
 const backBtn = document.getElementById("backBtn");
-
 const playlistEl = document.getElementById("playlist");
-
 const playBtn = document.getElementById("playBtn");
 const nextBtn = document.getElementById("nextBtn");
 const prevBtn = document.getElementById("prevBtn");
-
 const cover = document.getElementById("cover");
-
 const title = document.getElementById("trackTitle");
 const artist = document.getElementById("trackArtist");
-
 const progress = document.getElementById("progress");
 const progressContainer =
 document.getElementById("progressContainer");
-
 const currentTimeEl =
 document.getElementById("currentTime");
-
 const durationEl =
 document.getElementById("duration");
-
 const volume =
 document.getElementById("volume");
-
 const addSongBtn =
 document.getElementById("addSongBtn");
-
 const fileInput =
 document.getElementById("fileInput");
 
-/* SIDEBAR TOGGLE */
 menuBtn.onclick = ()=>{
 
-    sidebar.classList.toggle("active");
+sidebar.classList.toggle("active");
 
 };
 
-/* LOAD TRACK */
 function loadTrack(i){
 
-    if(tracks.length === 0){
+if(tracks.length===0){
 
-        title.textContent = "No Songs";
-        artist.textContent = "";
-        cover.src = "https://picsum.photos/300";
+title.textContent="No Songs";
+artist.textContent="";
+audio.src="";
 
-        audio.src = "";
+return;
 
-        return;
-    }
-
-    const t = tracks[i];
-
-    audio.src = t.src;
-
-    title.textContent = t.title;
-    artist.textContent = t.artist;
-
-    cover.src = t.cover;
-
-    document
-    .querySelectorAll(".song")
-    .forEach(s=>s.classList.remove("active"));
-
-    const active =
-    document.querySelectorAll(".song")[i];
-
-    if(active){
-        active.classList.add("active");
-    }
 }
 
-/* PLAYLIST */
+const t = tracks[i];
+
+audio.src = t.src;
+
+title.textContent = t.title;
+artist.textContent = t.artist;
+
+cover.src = t.cover;
+
+document
+.querySelectorAll(".song")
+.forEach(s=>s.classList.remove("active"));
+
+const active =
+document.querySelectorAll(".song")[i];
+
+if(active){
+
+active.classList.add("active");
+
+}
+
+}
+
 function renderPlaylist(){
 
-    playlistEl.innerHTML = "";
+playlistEl.innerHTML = "";
 
-    tracks.forEach((t,i)=>{
+tracks.forEach((t,i)=>{
 
-        const div =
-        document.createElement("div");
+const div =
+document.createElement("div");
 
-        div.classList.add("song");
+div.classList.add("song");
 
-        div.innerHTML = `
+if(i===index){
 
-        <div class="song-left">
-
-            <img src="${t.cover}">
-
-            <div>
-                <div>${t.title}</div>
-                <small>${t.artist}</small>
-            </div>
-
-        </div>
-
-        <button class="remove-btn">
-            ❌
-        </button>
-
-        `;
-
-        /* REMOVE */
-        div.querySelector(".remove-btn")
-        .onclick = (e)=>{
-
-            e.stopPropagation();
-
-            tracks.splice(i,1);
-
-            if(index >= tracks.length){
-                index = 0;
-            }
-
-            renderPlaylist();
-            loadTrack(index);
-
-            audio.pause();
-
-            playBtn.textContent = "▶";
-        };
-
-        /* PLAY */
-        div.onclick = ()=>{
-
-            index = i;
-
-            loadTrack(index);
-
-            audio.play()
-            .catch(err=>console.log(err));
-
-            playBtn.textContent = "⏸";
-        };
-
-        playlistEl.appendChild(div);
-
-    });
+div.classList.add("active");
 
 }
 
-/* PLAY PAUSE */
+div.innerHTML = `
+
+<div class="song-left">
+
+<img src="${t.cover}">
+
+<div>
+
+<div>${t.title}</div>
+
+<small>${t.artist}</small>
+
+<br>
+
+<small>
+⏱ ${t.duration || "0:00"}
+</small>
+
+</div>
+
+</div>
+
+<div style="
+display:flex;
+align-items:center;
+gap:10px;
+">
+
+<button class="fav-btn">
+${t.favorite ? "❤️" : "🤍"}
+</button>
+
+<button class="remove-btn">
+❌
+</button>
+
+</div>
+
+`;
+
+div.querySelector(".fav-btn")
+.onclick = (e)=>{
+
+e.stopPropagation();
+
+t.favorite = !t.favorite;
+
+savePlaylist();
+
+renderPlaylist();
+
+};
+
+div.querySelector(".remove-btn")
+.onclick = (e)=>{
+
+e.stopPropagation();
+
+tracks.splice(i,1);
+
+if(index >= tracks.length){
+
+index = 0;
+
+}
+
+savePlaylist();
+
+renderPlaylist();
+
+loadTrack(index);
+
+audio.pause();
+
+playBtn.textContent = "▶";
+
+showToast("Song Removed ❌");
+
+};
+
+div.onclick = ()=>{
+
+index = i;
+
+loadTrack(index);
+
+audio.play()
+.catch(err=>console.log(err));
+
+playBtn.textContent = "⏸";
+
+showToast("Playing 🎵");
+
+};
+
+div.ondblclick = ()=>{
+
+const newName =
+prompt("Rename Song",t.title);
+
+if(newName){
+
+t.title = newName;
+
+savePlaylist();
+
+renderPlaylist();
+
+showToast("Song Renamed ✏️");
+
+}
+
+};
+
+playlistEl.appendChild(div);
+
+});
+
+}
+
 playBtn.onclick = ()=>{
 
-    if(audio.paused){
+if(audio.paused){
 
-        audio.play()
-        .catch(err=>console.log(err));
+audio.play()
+.catch(err=>console.log(err));
 
-        playBtn.textContent = "⏸";
+playBtn.textContent = "⏸";
 
-    }else{
+}else{
 
-        audio.pause();
+audio.pause();
 
-        playBtn.textContent = "▶";
-    }
+playBtn.textContent = "▶";
 
-};
-
-/* NEXT */
-nextBtn.onclick = ()=>{
-
-    if(tracks.length===0) return;
-
-    index = (index+1)%tracks.length;
-
-    loadTrack(index);
-
-    audio.play();
-
-    playBtn.textContent = "⏸";
-};
-
-/* PREV */
-prevBtn.onclick = ()=>{
-
-    if(tracks.length===0) return;
-
-    index =
-    (index-1+tracks.length)%tracks.length;
-
-    loadTrack(index);
-
-    audio.play();
-
-    playBtn.textContent = "⏸";
-};
-
-/* AUTO NEXT */
-audio.addEventListener("ended", ()=>{
-
-    nextBtn.click();
-
-});
-
-/* TIME UPDATE */
-audio.addEventListener("timeupdate", ()=>{
-
-    const percent =
-    (audio.currentTime/audio.duration)*100;
-
-    progress.style.width = percent+"%";
-
-    currentTimeEl.textContent =
-    format(audio.currentTime);
-
-    durationEl.textContent =
-    format(audio.duration);
-
-});
-
-/* SEEK */
-progressContainer.onclick = (e)=>{
-
-    const width =
-    progressContainer.clientWidth;
-
-    audio.currentTime =
-    (e.offsetX/width)*audio.duration;
-
-};
-
-/* VOLUME */
-volume.oninput = ()=>{
-
-    audio.volume = volume.value;
-
-};
-
-/* FORMAT */
-function format(t){
-
-    if(isNaN(t)) return "0:00";
-
-    let m = Math.floor(t/60);
-
-    let s = Math.floor(t%60);
-
-    return m+":"+(s<10?"0":"")+s;
 }
 
-/* ROTATION */
-audio.addEventListener("play", ()=>{
+};
 
-    cover.classList.add("playing");
+nextBtn.onclick = ()=>{
+
+if(tracks.length===0) return;
+
+index = (index+1)%tracks.length;
+
+loadTrack(index);
+
+audio.play();
+
+playBtn.textContent = "⏸";
+
+};
+
+prevBtn.onclick = ()=>{
+
+if(tracks.length===0) return;
+
+index =
+(index-1+tracks.length)%tracks.length;
+
+loadTrack(index);
+
+audio.play();
+
+playBtn.textContent = "⏸";
+
+};
+
+audio.addEventListener("ended",()=>{
+
+nextBtn.click();
 
 });
 
-audio.addEventListener("pause", ()=>{
+audio.addEventListener("timeupdate",()=>{
 
-    cover.classList.remove("playing");
+const percent =
+audio.duration
+? (audio.currentTime/audio.duration)*100
+: 0;
+
+progress.style.width = percent+"%";
+
+currentTimeEl.textContent =
+format(audio.currentTime);
+
+durationEl.textContent =
+format(audio.duration);
 
 });
 
-/* ADD SONGS */
+progressContainer.onclick = (e)=>{
+
+const width =
+progressContainer.clientWidth;
+
+audio.currentTime =
+(e.offsetX/width)*audio.duration;
+
+};
+
+volume.oninput = ()=>{
+
+audio.volume = volume.value;
+
+};
+
+function format(t){
+
+if(isNaN(t)) return "0:00";
+
+let m = Math.floor(t/60);
+
+let s = Math.floor(t%60);
+
+return m+":"+(s<10?"0":"")+s;
+
+}
+
+audio.addEventListener("play",()=>{
+
+cover.classList.remove("playing");
+
+void cover.offsetWidth;
+
+cover.classList.add("playing");
+
+});
+
+audio.addEventListener("pause",()=>{
+
+cover.classList.remove("playing");
+
+});
+
 addSongBtn.onclick = ()=>{
 
-    fileInput.click();
+fileInput.click();
 
 };
 
-/* UPLOAD SONG */
-fileInput.onchange = (e)=>{
+fileInput.onchange = async (e)=>{
 
-    const files = [...e.target.files];
+const files = [...e.target.files];
 
-    files.forEach(file=>{
+for(const file of files){
 
-        const url =
-        URL.createObjectURL(file);
+const url =
+URL.createObjectURL(file);
 
-        tracks.push({
+const tempAudio =
+document.createElement("audio");
 
-            src:url,
+tempAudio.src = url;
 
-            title:file.name.replace(".mp3",""),
+await new Promise(resolve=>{
 
-            artist:"Local File",
+tempAudio.addEventListener(
+"loadedmetadata",
+resolve
+);
 
-            cover:
-            "https://picsum.photos/300?random="
-            + Math.random()
+});
 
-        });
+tracks.push({
 
-    });
+src:url,
 
-    renderPlaylist();
+title:file.name.replace(
+/\.[^/.]+$/,
+""
+),
+
+artist:"Local File",
+
+duration:
+format(tempAudio.duration),
+
+favorite:false,
+
+cover:
+"https://picsum.photos/300?random="
++ Math.random()
+
+});
+
+}
+
+savePlaylist();
+
+renderPlaylist();
+
+showToast("Songs Added 🎶");
 
 };
-/* BACK BUTTON */
+
+function savePlaylist(){
+
+localStorage.setItem(
+"tracks",
+JSON.stringify(tracks)
+);
+
+}
+
+function showToast(msg){
+
+const toast =
+document.getElementById("toast");
+
+toast.textContent = msg;
+
+toast.style.opacity = 1;
+
+setTimeout(()=>{
+
+toast.style.opacity = 0;
+
+},2000);
+
+}
+
+const searchSong =
+document.getElementById("searchSong");
+
+searchSong.oninput = ()=>{
+
+const value =
+searchSong.value.toLowerCase();
+
+document
+.querySelectorAll(".song")
+.forEach(song=>{
+
+song.style.display =
+song.innerText
+.toLowerCase()
+.includes(value)
+? "flex"
+: "none";
+
+});
+
+};
+
+document.addEventListener(
+"keydown",
+(e)=>{
+
+if(e.code==="Space"){
+
+e.preventDefault();
+
+playBtn.click();
+
+}
+
+if(e.code==="ArrowRight"){
+
+nextBtn.click();
+
+}
+
+if(e.code==="ArrowLeft"){
+
+prevBtn.click();
+
+}
+
+});
+
 backBtn.onclick = ()=>{
 
-    // If sidebar open -> close it
-    if(sidebar.classList.contains("active")){
+if(sidebar.classList.contains("active")){
 
-        sidebar.classList.remove("active");
+sidebar.classList.remove("active");
 
-    }else{
+}else{
 
-        // Otherwise go browser back
-        history.back();
+history.back();
 
-    }
+}
 
 };
 
-/* INIT */
 renderPlaylist();
 loadTrack(index);
 
