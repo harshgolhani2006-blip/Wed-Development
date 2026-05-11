@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      // 'use strict'
+      //  let b=10
+      //  {
+       //     var a=5
+        //    let b=10
+        //    const c=40
+       // }
+      //  console.log(a);
+      //  console.log(b);
+     //   console.log(c); // give error.
+
+    // function sum(){
+    //    let a=5
+   //  }
+   //  console.log(a);
+   //  sum()   //Give error a is not defined.
+
+   //let Student={
+   // id:127,
+   // name:"Harsh Golhani",
+   // isPass:true, //kanel Case.
+   // sum :function(){
+    //    console.log("Hello");
+   // }
+  // }
+  // console.log(Student.id);
+   // console.log(Student.name);
+ //  console.log(Student.isPass)
+ //  Student.sum();
+ 
+// loop through object
+//for (let key in Student) {
+   // console.log(key, ":", Student[key]);
+//}
+
+//let Student={
+  //  id:127,
+  //  name:"Harsh Golhani",
+  //  isPass:true, //kanel Case.
+  //  sum :function(){
+     //   console.log("Hello");
+   //  console.log(this);
+ //   }
+ //  }
+ //  Student.sum();
+
+ //console.log(this)  //without function.
+
+// function sum(){
+ //   console.log(this);
+// }
+// sum()   // undefine with use strict.
+// store in windom.
+
+//var id=20
+//let Student={
+   // id:127,
+   // name:"Harsh Golhani.",
+    //isPass:true,
+  //  sum:function(){ //127
+  //sum:()=>{  // 20
+ // sum:function(){
+ // let s=()=>{
+    //   console.log(this.id);
+ //   }
+  //  s();  //127
+//  }
+//}
+//Student.sum();
+
+//gsc
+//function outer(){
+  //  let userName="Harsh Golhani"
+  //  function inner(){
+  //      console.log(userName);
+  //  }
+   // inner()
+ //  return inner
+//}
+//outer();
+
+function outer(){
+    let userName="Harsh Golhani"
+   function inner(){
+       console.log(userName);
+   }
+   // inner()
+   return inner
+}
+let fn=outer();
+fn();
+
+</script>
+</body>
+</html>
