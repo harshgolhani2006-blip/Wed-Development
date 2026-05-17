@@ -1,5 +1,5 @@
 let canvas=document.querySelector("canvas")
-  let pen=   canvas.getContext("2d")
+  let pen=canvas.getContext("2d")
   let snakeCell=[[0,0]]
   let cell=50
   let direction="right"
@@ -104,9 +104,3 @@ pen.fillText(`${score}`,100,300)
 
      }
  
-     
-
-      // console.log(Math.random()*950,"RANDOM DATAAAA X");
-      // console.log(Math.random()*550,"RANDOM DATAAAA   Y");
-
-      
