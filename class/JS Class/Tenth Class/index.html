@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage Example</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            background-color: lightskyblue;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container{
+            width: 350px;
+            padding: 25px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        h1{
+            text-align: center;
+        }
+
+        input{
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid gray;
+            font-size: 16px;
+        }
+
+        .btn-box{
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        button{
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        button:hover{
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <form class="container" onsubmit="saveData(event)">
+
+        <h1>Registration Form</h1>
+
+        <input type="text" id="name" placeholder="Enter Name" required>
+
+        <input type="email" id="email" placeholder="Enter Email" required>
+
+        <input type="password" id="password" placeholder="Enter Password" required>
+
+        <div class="btn-box">
+            <button type="submit">Save Data</button>
+
+            <button type="button" onclick="resetData()">
+                Reset Data
+            </button>
+        </div>
+
+         <p id="showName"></p>
+<p id="showEmail"></p>
+<p id="showPassword"></p>
+<button type="button" onclick="showData()"> Add Data </button>
+<button type="button" onclick="clearData()"> Clear Data </button>
+        <h1>Login Form</h1>
+
+        <input type="text" id="loginName" placeholder="Enter Name">
+
+        <input type="email" id="loginEmail" placeholder="Enter Email">
+
+        <input type="password" id="loginPassword" placeholder="Enter Password">
+
+        <button type="button" onclick="login()">
+            Login
+        </button>
+
+    </form>
+
+    <script rel="Javascript" src="index.js"></script>
+
+</body>
+</html>
