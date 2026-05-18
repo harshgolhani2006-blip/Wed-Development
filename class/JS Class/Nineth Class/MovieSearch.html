@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Search</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#111;
+    color:white;
+    padding:20px;
+}
+
+.container{
+    text-align:center;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+input{
+    padding:12px;
+    width:250px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    background:red;
+    color:white;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+#results{
+    margin-top:30px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#222;
+    padding:15px;
+    border-radius:15px;
+}
+
+.card img{
+    width:100%;
+    border-radius:10px;
+}
+
+.card h2{
+    margin-top:10px;
+    font-size:20px;
+}
+
+.card p{
+    margin-top:8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎬 Movie Search App</h1>
+
+    <input type="text" id="searchInput" placeholder="Search Movie">
+
+    <button id="searchButton">
+        Search
+    </button>
+
+    <div id="results"></div>
+
+</div>
+
+<script>
+
+let input = document.getElementById('searchInput');
+
+let button = document.getElementById('searchButton');
+
+let results = document.getElementById('results');
+
+button.addEventListener('click', function(){
+
+    let query = input.value;
+
+    fetch(`https://api.tvmaze.com/search/shows?q=${query}`)
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        results.innerHTML = "";
+
+        if(data.length === 0){
+
+            results.innerHTML = "<h2>No Movies Found ❌</h2>";
+
+            return;
+
+        }
+
+        data.forEach(item => {
+
+            let show = item.show;
+
+            let movieElement = document.createElement('div');
+
+            movieElement.classList.add("card");
+
+            movieElement.innerHTML = `
+
+                <img src="${show.image ? show.image.medium : ''}" >
+
+                <h2>${show.name}</h2>
+
+                <p>⭐ Rating : 
+                ${show.rating.average || "N/A"}</p>
+
+                <p>🌍 Language : 
+                ${show.language}</p>
+
+                <p>🎭 Genre : 
+                ${show.genres.join(", ")}</p>
+
+            `;
+
+            results.appendChild(movieElement);
+
+        });
+
+    })
+
+    .catch(error => {
+
+        console.log(error);
+
+        results.innerHTML =
+        "<h2>Error Fetching Data ⚠</h2>";
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
