@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Weather Tracker</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(to right,#4facfe,#00f2fe);
+}
+
+.box{
+  width:420px;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+h1{
+  margin-bottom:20px;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:10px;
+  margin-bottom:15px;
+  font-size:16px;
+}
+
+button{
+  padding:12px 25px;
+  border:none;
+  background:#007bff;
+  color:white;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#0056b3;
+}
+
+.weather{
+  margin-top:25px;
+}
+
+.weather h2{
+  margin:10px 0;
+  font-size:18px;
+}
+
+img{
+  width:100px;
+}
+
+#loading{
+  margin-top:10px;
+  color:#444;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <h1>🌤 Weather Tracker</h1>
+
+  <input type="text" id="city" placeholder="Enter City Name">
+
+  <button onclick="getWeather()">
+    Get Weather
+  </button>
+
+  <p id="loading"></p>
+
+  <div class="weather">
+
+    <h2 id="cityName"></h2>
+
+    <img id="icon" src="">
+
+    <h2 id="temp"></h2>
+
+    <h2 id="feels"></h2>
+
+    <h2 id="condition"></h2>
+
+    <h2 id="humidity"></h2>
+
+    <h2 id="wind"></h2>
+
+    <h2 id="pressure"></h2>
+
+    <h2 id="sunrise"></h2>
+
+    <h2 id="sunset"></h2>
+
+  </div>
+
+</div>
+
+<script>
+
+async function getWeather(){
+
+  let city = document.getElementById("city").value;
+
+  let loading = document.getElementById("loading");
+
+  loading.innerText = "Loading...";
+
+  let apiKey = "9f6290d6cda9a36a63755fadee71f83d";
+
+  let url =
+  `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+  try{
+
+    let response = await fetch(url);
+
+    let data = await response.json();
+
+    console.log(data);
+
+    if(data.cod == "404"){
+
+      alert("City Not Found ❌");
+
+      loading.innerText = "";
+
+      return;
+
+    }
+
+    document.getElementById("cityName").innerText =
+    `${data.name}, ${data.sys.country}`;
+
+    document.getElementById("temp").innerText =
+    `Temperature : ${data.main.temp} °C`;
+
+    document.getElementById("feels").innerText =
+    `Feels Like : ${data.main.feels_like} °C`;
+
+    document.getElementById("condition").innerText =
+    `Weather : ${data.weather[0].main}`;
+
+    document.getElementById("humidity").innerText =
+    `Humidity : ${data.main.humidity}%`;
+
+    document.getElementById("wind").innerText =
+    `Wind Speed : ${data.wind.speed} km/h`;
+
+    document.getElementById("pressure").innerText =
+    `Pressure : ${data.main.pressure} hPa`;
+
+    let sunrise =
+    new Date(data.sys.sunrise * 1000).toLocaleTimeString();
+
+    let sunset =
+    new Date(data.sys.sunset * 1000).toLocaleTimeString();
+
+    document.getElementById("sunrise").innerText =
+    `Sunrise : ${sunrise}`;
+
+    document.getElementById("sunset").innerText =
+    `Sunset : ${sunset}`;
+
+    document.getElementById("icon").src =
+    `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+    loading.innerText = "✅ Weather Loaded";
+
+  }
+
+  catch(error){
+
+    console.log(error);
+
+    loading.innerText = "⚠ Something Went Wrong";
+
+  }
+
+}
+
+document.getElementById("city").addEventListener("keypress",function(e){
+
+  if(e.key === "Enter"){
+
+    getWeather();
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
