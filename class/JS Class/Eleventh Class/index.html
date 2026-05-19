@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Time</title>
+
+  <style>
+
+    body{
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: rgb(30,30,89);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #quiz-container{
+      width: 500px;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    h1{
+      text-align: center;
+      color: rgb(21,21,202);
+      margin-bottom: 25px;
+    }
+
+    .top-box{
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    #score,
+    #timer{
+      flex: 1;
+      background-color: rgb(107,107,145);
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .q{
+      color: gray;
+      margin-bottom: 10px;
+    }
+
+    #question{
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .option{
+      width: 100%;
+      padding: 14px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #f1f1f1;
+      transition: 0.3s;
+    }
+
+    .option:hover{
+      background-color: rgb(107,107,145);
+      color: white;
+    }
+
+    .correct{
+      background-color: green !important;
+      color: white;
+    }
+
+    .wrong{
+      background-color: red !important;
+      color: white;
+    }
+
+    #next-btn{
+      width: 100%;
+      padding: 15px;
+      margin-top: 25px;
+      border: none;
+      border-radius: 6px;
+      background-color: rgb(21,21,202);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #next-btn:hover{
+      background-color: rgb(10,10,150);
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div id="quiz-container">
+
+    <h1>🧠 Quiz Time!</h1>
+
+    <div class="top-box">
+
+      <div id="score">
+        <h3>Score: 0</h3>
+      </div>
+
+      <div id="timer">
+        <h3>⏳ 30s</h3>
+      </div>
+
+    </div>
+
+    <p class="q">
+      Question 1 of 5
+    </p>
+
+    <h2 id="question"></h2>
+
+    <div id="options"></div>
+
+    <button id="next-btn">
+      Next Question
+    </button>
+
+  </div>
+
+  <script>
+
+    const questions = [
+
+      {
+        question: "HTML ka full form kya hai?",
+        options: [
+          "Hyper Text Markup Language",
+          "High Text Machine Language",
+          "Hyper Tabular Markup Language",
+          "Home Tool Markup Language"
+        ],
+        answer: 0
+      },
+
+      {
+        question: "CSS me color change karne ke liye kaunsi property use hoti hai?",
+        options: [
+          "font-color",
+          "text-color",
+          "color",
+          "background"
+        ],
+        answer: 2
+      },
+
+      {
+        question: "JavaScript me variable declare karne ke liye kaunsa keyword use hota hai?",
+        options: [
+          "var",
+          "int",
+          "string",
+          "declare"
+        ],
+        answer: 0
+      },
+
+      {
+        question: "Kaunsa HTML tag sabse bada heading banata hai?",
+        options: [
+          "<h6>",
+          "<heading>",
+          "<h1>",
+          "<head>"
+        ],
+        answer: 2
+      },
+
+      {
+        question: "JavaScript me array ki length kaise pata karte hain?",
+        options: [
+          "array.size()",
+          "array.length",
+          "array.count",
+          "length(array)"
+        ],
+        answer: 1
+      }
+
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let timeLeft = 30;
+    let timerInterval;
+    let answered = false;
+
+    window.onload = function () {
+      loadQuestion();
+    };
+
+    function loadQuestion() {
+
+      answered = false;
+      timeLeft = 30;
+
+      document.getElementById("timer").innerHTML =
+      `<h3>⏳ ${timeLeft}s</h3>`;
+
+      const q = questions[currentQuestion];
+
+      document.querySelector(".q").textContent =
+      `Question ${currentQuestion + 1} of ${questions.length}`;
+
+      document.getElementById("question").textContent =
+      q.question;
+
+      const optionsDiv = document.getElementById("options");
+
+      optionsDiv.innerHTML = "";
+
+      q.options.forEach((option, index) => {
+
+        const btn = document.createElement("button");
+
+        btn.classList.add("option");
+
+        btn.textContent = option;
+
+        btn.onclick = () => checkAnswer(index, btn);
+
+        optionsDiv.appendChild(btn);
+
+      });
+
+      document.getElementById("next-btn").disabled = true;
+
+      startTimer();
+    }
+
+    function startTimer() {
+
+      clearInterval(timerInterval);
+
+      timerInterval = setInterval(() => {
+
+        timeLeft--;
+
+        document.getElementById("timer").innerHTML =
+        `<h3>⏳ ${timeLeft}s</h3>`;
+
+        if (timeLeft <= 0) {
+
+          clearInterval(timerInterval);
+
+          timeUp();
+        }
+
+      }, 1000);
+    }
+
+    function checkAnswer(selectedIndex, btn) {
+
+      if (answered) return;
+
+      answered = true;
+
+      clearInterval(timerInterval);
+
+      const correctIndex =
+      questions[currentQuestion].answer;
+
+      const allOptions =
+      document.querySelectorAll(".option");
+
+      allOptions.forEach(option => {
+        option.disabled = true;
+      });
+
+      if (selectedIndex === correctIndex) {
+
+        btn.classList.add("correct");
+
+        score++;
+
+        document.getElementById("score").innerHTML =
+        `<h3>Score: ${score}</h3>`;
+
+      } else {
+
+        btn.classList.add("wrong");
+
+        allOptions[correctIndex]
+        .classList.add("correct");
+      }
+
+      document.getElementById("next-btn").disabled = false;
+    }
+
+    function timeUp() {
+
+      answered = true;
+
+      const correctIndex =
+      questions[currentQuestion].answer;
+
+      const allOptions =
+      document.querySelectorAll(".option");
+
+      allOptions.forEach(option => {
+        option.disabled = true;
+      });
+
+      allOptions[correctIndex]
+      .classList.add("correct");
+
+      document.getElementById("next-btn").disabled = false;
+    }
+
+    document.getElementById("next-btn").onclick = function () {
+
+      currentQuestion++;
+
+      if (currentQuestion < questions.length) {
+
+        loadQuestion();
+
+      } else {
+
+        clearInterval(timerInterval);
+
+        alert(
+          `Quiz Finished!\n\nYour Score: ${score}/${questions.length}`
+        );
+
+        location.reload();
+      }
+    };
+
+  </script>
+
+</body>
+</html>
