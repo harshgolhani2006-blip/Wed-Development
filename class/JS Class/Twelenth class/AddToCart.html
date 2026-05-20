@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+
+    <style>
+
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: whitesmoke;
+        }
+
+        button{
+            padding:10px 20px;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+            color:white;
+            font-size:16px;
+            margin:5px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<script>
+
+    let body = document.querySelector("body");
+
+    let data = JSON.parse(localStorage.getItem("cart"));
+
+    if(data){
+
+        body.innerHTML += `
+
+        <div style="
+            border:1px solid black;
+            padding:20px;
+            width:300px;
+            border-radius:21px;
+            background-color:white;
+            text-align:center;
+            box-shadow:0 0 10px gray;
+        "> 
+
+            <img 
+                src="${data.thumbnail}" 
+                width="100%"
+                style="
+                    height:200px;
+                    object-fit:cover;
+                    border-radius:10px;
+                "
+            >
+
+            <h2>${data.title}</h2>
+
+            <h3>${data.brand}</h3>
+
+            <h4>$${data.price}</h4>
+
+            <p>${data.description}</p>
+
+            <button 
+                onclick="removeItem()"
+                style="background-color:red;"
+            >
+                Remove
+            </button>
+
+            <button 
+                onclick="addMore()"
+                style="background-color:green;"
+            >
+                Add More
+            </button>
+
+        </div>
+
+        `;
+
+    }
+    else{
+
+        body.innerHTML = "<h1>Cart is Empty</h1>";
+
+    }
+
+    function removeItem(){
+
+        localStorage.removeItem("cart");
+
+        alert("Item Removed");
+
+        location.reload();
+
+    }
+
+    function addMore(){
+
+        window.location.href = "index.html";
+
+    }
+
+</script>
+
+</body>
+</html>
