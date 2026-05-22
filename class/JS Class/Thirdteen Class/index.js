@@ -31,13 +31,27 @@
 // let obj3 = {...obj1, ...obj2};
 // console.log(obj3);
 
-function sum(a, b, c, ...nums) {
- let total = a + b + c;
+// function sum(a, b, c, ...nums) {
+//  let total = a + b + c;
 
-    for(let i of nums){
-        total += i;
-    }
+//     for(let i of nums){
+//         total += i;
+//     }
 
-    console.log(total);
-}
-sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30);
+//     console.log(total);
+// }
+// sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30);
+
+// let arr = [1, 2, 3, 4, 5];
+// let [a, b, c, d, e] = arr;
+// console.log(a, b, c, d, e);
+
+// let obj = {
+//     name: 'John',
+//     age: 30,
+//     city: 'New York'
+// }
+// let { name, age, city } = obj;
+// console.log(name, age, city);
+
+$("h1").css("color", "red");
