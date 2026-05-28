@@ -37,7 +37,9 @@ const Home = () => {
   return (
     <div>
       <h2>Home Page</h2>
+      {console.log("Home Page")}
     </div>
   );
-}
+};
+
 export default Home;
