@@ -25,6 +25,15 @@ const Form = () => {
 
     alert("Form Submitted Successfully")
   }
+   function handleClear() {
+   SetInput({
+      name: "",
+      email: "",
+      passWord: ""
+    })
+
+    alert("Form Clear Successfully")
+  }
 
   return (
     <div>
@@ -58,6 +67,10 @@ const Form = () => {
 
         <button type='submit'>
           Submit
+        </button>
+
+         <button type='button' onClick={handleClear}>
+          Clear
         </button>
 
       </form>
