@@ -81,16 +81,49 @@
 
 // export default App;
 
-import React, { useEffect, useState } from 'react'
+// import React, { useEffect, useState } from 'react'
 
-const UseStateEffect = () => {
-  let [ApiData,setData]=useState({})
-  useEffect=()=>{
-    let [count,set]
-  }
+// const UseStateEffect = () => {
+//   let [ApiData,setData]=useState({})
+//   useEffect=()=>{
+//     let [count,set]
+//   }
+//   return (
+//     <div>UseStateEffect</div>
+//   )
+// }
+
+// export default UseStateEffect
+
+
+import './App.css'
+const App = () => {
+      let [ApiData,SetApiData]=    useState([])
+      useEffect(()=>{
+              //  console.log("hello"); 
+              async  function call(){
+                let res=  await  fetch("https://dummyjson.com/products")
+                let data=        await   res.json()
+                console.log(data.products);
+                SetApiData(data.products)
+              }
+              call()
+      },[])
+      
   return (
-    <div>UseStateEffect</div>
+    <div id="parent_div"   className="">
+        {
+          ApiData.map((a)=>{
+               return(
+                <div id="card">
+                  <h1>{a.id}</h1>
+                  <img  src={a.thumbnail}/>
+                </div>
+               )
+          })
+        }
+    </div>
   )
 }
 
-export default UseStateEffect
+export default App
