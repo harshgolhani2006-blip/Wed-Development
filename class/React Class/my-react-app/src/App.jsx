@@ -127,13 +127,26 @@
 
 // export default App
 
+// import React from 'react'
+// import UseStateEffect from './UseStateEffect'
+
+// const App = () => {
+//   return (
+//     <div>
+//       <UseStateEffect />
+//     </div>
+//   )
+// }
+
+// export default App
+
 import React from 'react'
-import UseStateEffect from './UseStateEffect'
+import Product from './Product'
 
 const App = () => {
   return (
     <div>
-      <UseStateEffect />
+      <Product/>
     </div>
   )
 }
