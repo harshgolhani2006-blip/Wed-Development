@@ -140,14 +140,35 @@
 
 // export default App
 
+// import React from 'react'
+// import Product from './Product'
+
+// const App = () => {
+//   return (
+//     <div>
+//       <Product/>
+//     </div>
+//   )
+// }
+
+// export default App
 import React from 'react'
+import NavBar from './NavBar'
+import { Routes, Route } from 'react-router-dom'
+import Home from './Home'
+import Form from './Form'
 import Product from './Product'
 
 const App = () => {
   return (
-    <div>
-      <Product/>
-    </div>
+    <>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Form" element={<Form />} />
+        <Route path="/Product" element={<Product />} />
+      </Routes>
+    </>
   )
 }
 
