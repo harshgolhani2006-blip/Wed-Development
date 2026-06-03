@@ -152,23 +152,38 @@
 // }
 
 // export default App
+
+// Routing doc react-router-dom
+// import React from 'react'
+// import NavBar from './NavBar'
+// import { Routes, Route } from 'react-router-dom'
+// import Home from './Home'
+// import Form from './Form'
+// import Product from './Product'
+
+// const App = () => {
+//   return (
+//     <>
+//       <NavBar />
+//       <Routes>
+//         <Route path="/" element={<Home />} />
+//         <Route path="/Form" element={<Form />} />
+//         <Route path="/Product" element={<Product />} />
+//       </Routes>
+//     </>
+//   )
+// }
+
+// export default App
+
 import React from 'react'
-import NavBar from './NavBar'
-import { Routes, Route } from 'react-router-dom'
-import Home from './Home'
-import Form from './Form'
-import Product from './Product'
+import Todo from './Todos'
 
 const App = () => {
   return (
-    <>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Form" element={<Form />} />
-        <Route path="/Product" element={<Product />} />
-      </Routes>
-    </>
+    <div>
+      <Todo />
+    </div>
   )
 }
 
