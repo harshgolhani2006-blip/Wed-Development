@@ -176,15 +176,38 @@
 
 // export default App
 
-import React from 'react'
-import Todo from './Todos'
+// import React from 'react'
+// import Todo from './Todos'
 
-const App = () => {
+// const App = () => {
+//   return (
+//     <div>
+//       <Todo />
+//     </div>
+//   )
+// }
+
+// export default App
+
+import { useEffect } from "react"
+import { useState } from "react"
+import React from 'react'
+import './App.css'
+const Cart = ({cart}) => {
   return (
     <div>
-      <Todo />
+          {
+        cart.map((a)=>{
+          return(<div id='main_card'>
+          <img   src={a.thumbnail}/>
+          {/* <h4>{a.title}</h4>
+          <h6>{a.price}</h6> */}
+
+          </div>)
+        })
+      }
     </div>
   )
 }
 
-export default App
+export default Cart
