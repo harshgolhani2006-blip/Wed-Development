@@ -332,11 +332,32 @@
 
 
 
-import React from 'react'
+import React, { useContext } from 'react'
+import { storeContext } from './Context'
 
 const Todo = () => {
+     
+   let {store,dispatch}=   useContext(storeContext)
+
+   
+ 
+   
   return (
-    <div>Todo</div>
+    <div>
+      <input onChange={(e)=>dispatch({type:"Set_inp",payload:e.target.value})}/>
+      <button onClick={()=>dispatch({type:"Add_todo"})}>add</button>
+      {
+        store.todos.map((a)=>{
+          console.log(a);
+          
+          return(<>
+          <h6>{a}</h6>
+          <button onClick={()=>dispatch({type:"DELET_TODO",payload:store.todos.indexOf(a)})}>Delet</button>
+          <button onClick={()=>dispatch({type:"EDIT_TODO",payload:store.todos.indexOf(a)})}>Edit</button>
+          </>)
+        })
+      }
+    </div>
   )
 }
 
