@@ -212,15 +212,78 @@
 
 // export default Cart
 
-import React from 'react'
-import Todo from './Todo'
+// import React from 'react'
+// import Todo from './Todo'
+
+// const App = () => {
+//   return (
+//     <div>
+//       <Todo/>
+//     </div>
+//   )
+// }
+
+// export default App
+
+//It is use memo function which is used to optimize the performance of the component by memoizing the result of a function and only re-computing it when the dependencies change. It is used to avoid unnecessary re-renders of a component when the props or state have not changed. It takes two arguments, a function that returns a value and an array of dependencies. The function will only be re-evaluated when one of the dependencies has changed. This can help improve the performance of a component by reducing the number of times it needs to be re-rendered.
+// import React, { useState } from 'react';
+// import UseCounter from "./UseCounter";
+// import { useMemo } from "react";
+
+// const App = () => {
+//   const { count, increment, decrement, reset } = UseCounter(0);
+// //   let res=0
+// //   function fun1(){
+// //     for(let i=0;i<100000000;i++){
+// //       res+=i
+// //     }
+// //    return res
+// //   }
+// //   let result=fun1()
+// //   console.log(result);
+
+// //solution of above problem is useMemo and useCallback hooks
+// let total=useMemo(()=>{
+//     let res=0
+//     for(let i=0;i<100000000;i++){
+//         res+=i
+//         }
+//         return res
+// },[])
+// console.log(total);
+//   return (
+//     <div>
+//       <h1>{count}</h1>
+
+//       <button onClick={increment}>++</button>
+//       <button onClick={decrement}>--</button>
+//       <button onClick={reset}>Reset</button>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+import React, { useState, memo } from "react";
 
 const App = () => {
+  const [count, setCount] = useState(0);
+
   return (
     <div>
-      <Todo/>
-    </div>
-  )
-}
+      <h1>{count}</h1>
 
-export default App
+      <button onClick={() => setCount(count + 1)}>
+        Add
+      </button>
+      <M />
+    </div>
+  );
+};
+
+const M = memo(function () {
+  console.log("Hello");
+  return <h2>Memo Component</h2>;
+});
+
+export default App;
