@@ -264,26 +264,41 @@
 
 // export default App;
 
-import React, { useState, memo } from "react";
+// import React, { useState, memo } from "react";
+
+// const App = () => {
+//   const [count, setCount] = useState(0);
+
+//   return (
+//     <div>
+//       <h1>{count}</h1>
+
+//       <button onClick={() => setCount(count + 1)}>
+//         Add
+//       </button>
+//       <M />
+//     </div>
+//   );
+// };
+
+// const M = memo(function () {
+//   console.log("Hello");
+//   return <h2>Memo Component</h2>;
+// });
+
+// export default App;
+
+
+//Practice .
+import React from 'react'
+import A from './A'
 
 const App = () => {
-  const [count, setCount] = useState(0);
-
   return (
     <div>
-      <h1>{count}</h1>
-
-      <button onClick={() => setCount(count + 1)}>
-        Add
-      </button>
-      <M />
+      <A/>
     </div>
-  );
-};
+  )
+}
 
-const M = memo(function () {
-  console.log("Hello");
-  return <h2>Memo Component</h2>;
-});
-
-export default App;
+export default App
