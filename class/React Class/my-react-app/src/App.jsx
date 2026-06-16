@@ -305,21 +305,200 @@
 
 //dynamic routinggggg
 
+// import React from 'react'
+// import UserList from "./UserList"
+// import { Route, Routes } from "react-router-dom"
+// import UserProfile from "./UserProfile"
+
+// const App = () => {
+//   return (
+//     <div>
+//      {/* http://localhost:5173/profile/0 */}
+//       <Routes>
+//         <Route   path="/"   element={ <UserList/>}/>
+//         <Route   path="/profile/:id"   element={ <UserProfile/>}/>
+
+//       </Routes>
+//     </div>
+//   )
+// }
+
+// export default App
+
+
+//Prototype
+// import React from 'react'
+
+// const App = () => {
+//   let arr=[1,2,3,4,5]
+//   function fun1(){
+//    Array.prototype.fun1=function(){
+//     console.log("Hello");
+//    }
+//     console.log("Hello");
+//   }
+//   console.log(Array.prototype);
+//   console.log(Object.prototype);
+//   console.log(Function.prototype);
+//   console.log(String.prototype);
+//   fun1();
+
+//   return (
+//     <div>App</div>
+//   )
+// }
+
+// export default App
+
+// import React from 'react'
+
+// const App = () => {
+//   let arr=[1,2,3,4,5]
+//  let data=0
+//   data = arr.forEach(function(a,b,c){
+//    // console.log(a,b,c);
+//    console.log(data);
+//   })
+//   let data2=arr.map(function(a,b,c){
+//     // console.log(a,b,c);
+//     return a
+//   })
+//   console.log(data2);
+
+//   return (
+//     <div>App</div>
+//   )
+// }
+
+// export default App
+
+//Map function using prototype
+// import React from 'react'
+
+// const App = () => {
+//   Array.prototype.myMap=function(callback){
+//     let newArr=[]
+//     for(let i=0;i<this.length;i++){
+//       newArr.push(this[i],i,this)
+//       newArr.push(callback(this[i],i,this))
+//     }
+//     return newArr;
+//   }
+//   let arr=[1,2,3,4,5]
+//   let data = arr.myMap((a, b, c) => {
+//     return a*2
+//     // console.log("value: "+a);
+//     // console.log("index: "+b);
+//     // console.log("array: "+c);
+//   });
+//   console.log(data);
+//   return (
+//     <div>App</div>
+//   )
+// }
+
+// export default App
+
+//filter function using prototype
+// import React from 'react'
+
+// const App = () => {
+//   Array.prototype.myFilter=function(callback){
+//     let newArr=[]
+//     for(let i=0;i<this.length;i++){
+//       if(callback(this[i],i,this)){
+//         newArr.push(this[i])
+//       }
+//     }
+//     return newArr;
+//   }
+//   let arr=[1,2,3,4,5]
+//   let data = arr.myFilter((a, b, c) => {
+//     return a>2
+//     // console.log("value: "+a);
+//     // console.log("index: "+b);
+//     // console.log("array: "+c);
+//   });
+//   console.log(data);
+//   return (
+//     <div>App</div>
+//   )
+// }
+
+// export default App
+
+//ForEach function using prototype
+// import React from 'react'
+
+// const App = () => {
+//   Array.prototype.myForEach=function(callback){
+//     for(let i=0;i<this.length;i++){
+//       callback(this[i],i,this)
+//     }
+//   }
+//   let arr=[1,2,3,4,5]
+//   let data = arr.myForEach((a, b, c) => {
+//     console.log("value: "+a);
+//     // console.log("index: "+b);
+//     // console.log("array: "+c);
+//   });
+//   console.log(data);
+//   return (
+//     <div>App</div>
+//   )
+// }
+
+// export default App
+
+//Reduce function using prototype
+// import React from 'react'
+
+// const App = () => {
+//   Array.prototype.myReduce=function(callback,initialValue){
+//     let arr=initialValue
+//     for(let i=0;i<this.length;i++){
+//       arr=callback(arr,this[i],i,this)
+//     }
+//     return arr;
+//   }
+//   let arr=[1,2,3,4,5]
+//   let data = arr.myReduce((acc, a, b, c,d) => {
+//     return acc+a
+//     // console.log("acc: "+acc);
+//     // console.log("value: "+a);
+//     // console.log("index: "+b);
+//     // console.log("array: "+c);
+//     // console.log("d: "+d);
+//   },10);
+//   console.log(data);
+//   return (
+//     <div>App</div>
+//   )
+// }
+
+// export default App
+
+// find function using prototype
 import React from 'react'
-import UserList from "./UserList"
-import { Route, Routes } from "react-router-dom"
-import UserProfile from "./UserProfile"
 
 const App = () => {
+  Array.prototype.myFind=function(callback){
+    for(let i=0;i<this.length;i++){
+      if(callback(this[i],i,this)){
+        return this[i]
+      }
+    }
+  }
+  let arr=[1,2,3,4,5]
+  let data = arr.myFind((a, b, c) => {
+    return a>2
+    // console.log("value: "+a);
+    // console.log("index: "+b);
+    // console.log("array: "+c);
+  });
+  console.log(data);
   return (
-    <div>
-     {/* http://localhost:5173/profile/0 */}
-      <Routes>
-        <Route   path="/"   element={ <UserList/>}/>
-        <Route   path="/profile/:id"   element={ <UserProfile/>}/>
-
-      </Routes>
-    </div>
+    <div>App</div>
   )
 }
 
