@@ -479,27 +479,56 @@
 // export default App
 
 // find function using prototype
-import React from 'react'
+// import React from 'react'
+
+// const App = () => {
+//   Array.prototype.myFind=function(callback){
+//     for(let i=0;i<this.length;i++){
+//       if(callback(this[i],i,this)){
+//         return this[i]
+//       }
+//     }
+//   }
+//   let arr=[1,2,3,4,5]
+//   let data = arr.myFind((a, b, c) => {
+//     return a>2
+//     // console.log("value: "+a);
+//     // console.log("index: "+b);
+//     // console.log("array: "+c);
+//   });
+//   console.log(data);
+//   return (
+//     <div>App</div>
+//   )
+// }
+
+// export default App
+
+import React, { useState } from "react";
+import "./App.css";
 
 const App = () => {
-  Array.prototype.myFind=function(callback){
-    for(let i=0;i<this.length;i++){
-      if(callback(this[i],i,this)){
-        return this[i]
-      }
-    }
-  }
-  let arr=[1,2,3,4,5]
-  let data = arr.myFind((a, b, c) => {
-    return a>2
-    // console.log("value: "+a);
-    // console.log("index: "+b);
-    // console.log("array: "+c);
-  });
-  console.log(data);
-  return (
-    <div>App</div>
-  )
-}
+  const [count, setCount] = useState(0);
 
-export default App
+  return (
+    <div className="container">
+      <h1>React Counter App</h1>
+
+      <h2>{count}</h2>
+
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+
+      <button onClick={() => setCount(count - 1)}>
+        Decrement
+      </button>
+
+      <button onClick={() => setCount(0)}>
+        Reset
+      </button>
+    </div>
+  );
+};
+
+export default App;
