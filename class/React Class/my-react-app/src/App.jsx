@@ -532,3 +532,16 @@
 // };
 
 // export default App;
+
+import React from 'react'
+import BlockBox from './ChatBox'
+
+const App = () => {
+  return (
+    <div>
+      <BlockBox/>
+    </div>
+  )
+}
+
+export default App
