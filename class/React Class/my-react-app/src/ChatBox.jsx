@@ -6,7 +6,7 @@ const ChatBox = () => {
     let [searchData, setSearchData] = useState("");
     let [Data, setData] = useState("");
 
-    let genAI = new GoogleGenerativeAI("AQ.Ab8RN6KxJzr-EByQs8KgPGu4z8DRSbJIZN6uuSxbt4KEpoVkew");
+    let genAI = new GoogleGenerativeAI("");
     async function search() {
         try {
             let model = genAI.getGenerativeModel({
