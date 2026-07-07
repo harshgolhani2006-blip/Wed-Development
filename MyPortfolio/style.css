@@ -1,0 +1,28 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #443e3e;
+    font-family: 'Poppins', sans-serif;
+    color:white;
+    line-height: 1.6;
+}
+
+.main-container{
+    display: grid;
+    max-width: 1200px;
+    grid-template-columns: 350px 1fr;
+    gap: 50px;
+    padding: 40px;
+    margin:auto
+}
+.sidebar{
+    height: 90vh;
+    background-color: #2b2b2b;
+}
+.main-content{
+    height: 90vh;
+    background-color: #2b2b2b;
+}
