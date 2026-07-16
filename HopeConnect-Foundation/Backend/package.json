@@ -1,0 +1,20 @@
+{
+  "name": "hopeconnect-backend",
+  "version": "1.0.0",
+  "description": "HopeConnect NGO Backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "ngo",
+    "backend",
+    "express"
+  ],
+  "author": "Harsh Golhani",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}
