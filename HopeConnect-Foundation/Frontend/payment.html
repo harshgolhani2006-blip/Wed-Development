@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Payment</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Complete Your Donation</h2>
+        </div>
+
+        <div class="impact-card" style="max-width:600px;margin:auto;">
+
+            <h3 id="amountDisplay"></h3>
+
+            <form id="paymentForm">
+
+                <input
+                    type="text"
+                    placeholder="Full Name"
+                    required
+                >
+
+                <br><br>
+
+                <input
+                    type="email"
+                    placeholder="Email Address"
+                    required
+                >
+
+                <br><br>
+
+                <input
+                    type="text"
+                    placeholder="Card Number"
+                    required
+                >
+
+                <br><br>
+
+                <button
+                    class="btn primary-btn"
+                    type="submit"
+                >
+                    Pay Now
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+
+const amount =
+localStorage.getItem("donationAmount");
+
+document.getElementById(
+    "amountDisplay"
+).innerText =
+`Donation Amount: ₹${amount}`;
+
+document.getElementById(
+    "paymentForm"
+).addEventListener(
+    "submit",
+    function(e){
+
+        e.preventDefault();
+
+        alert(
+            "Payment Successful! Thank you for your contribution."
+        );
+
+        localStorage.removeItem(
+            "donationAmount"
+        );
+
+        window.location.href =
+        "index.html";
+    }
+);
+
+</script>
+
+</body>
+</html>
