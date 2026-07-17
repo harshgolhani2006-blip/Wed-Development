@@ -378,27 +378,68 @@ if (newsletterForm) {
 }
 
 // =========================================
-// VOLUNTEER FORM DEMO
+// VOLUNTEER FORM BACKEND
 // =========================================
 
 const volunteerForm =
-    document.getElementById(
-        "volunteerForm"
-    );
+document.getElementById("volunteerForm");
 
 if (volunteerForm) {
 
     volunteerForm.addEventListener(
         "submit",
-        function (e) {
+        async function (e) {
 
             e.preventDefault();
 
-            alert(
-                "Thank you for registering as a volunteer!"
-            );
+            const data = {
 
-            volunteerForm.reset();
+                name:
+                volunteerForm.querySelector(
+                    'input[type="text"]'
+                ).value,
+
+                email:
+                volunteerForm.querySelector(
+                    'input[type="email"]'
+                ).value,
+
+                phone:
+                volunteerForm.querySelector(
+                    'input[type="tel"]'
+                ).value,
+
+                interest:
+                volunteerForm.querySelector(
+                    'select'
+                ).value
+            };
+
+            try {
+
+                const response = await fetch(
+                    "https://wed-development-aim4.onrender.com/api/volunteer",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    }
+                );
+
+                const result = await response.json();
+
+                alert(result.message);
+
+                volunteerForm.reset();
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert("Unable to connect to server.");
+            }
         }
     );
 }
@@ -425,6 +466,75 @@ document
     });
 
 });
+
+// =========================================
+// CONTACT FORM BACKEND
+// =========================================
+
+const contactForm =
+document.getElementById("contactForm");
+
+if (contactForm) {
+
+    contactForm.addEventListener(
+        "submit",
+        async function (e) {
+
+            e.preventDefault();
+
+            const data = {
+
+                name:
+                contactForm.querySelector(
+                    'input[type="text"]'
+                ).value,
+
+                email:
+                contactForm.querySelector(
+                    'input[type="email"]'
+                ).value,
+
+                subject:
+                contactForm.querySelectorAll(
+                    'input[type="text"]'
+                )[1].value,
+
+                message:
+                contactForm.querySelector(
+                    'textarea'
+                ).value
+            };
+
+            try {
+
+                const response = await fetch(
+                    "https://wed-development-aim4.onrender.com/api/contact",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    }
+                );
+
+                const result = await response.json();
+
+                alert(result.message);
+
+                contactForm.reset();
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert("Unable to connect to server.");
+            }
+        }
+    );
+}
+
+
 // =========================================
 // CURRENT YEAR IN FOOTER
 // =========================================
