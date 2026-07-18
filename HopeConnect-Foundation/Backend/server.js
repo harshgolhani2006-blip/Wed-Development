@@ -79,7 +79,7 @@ app.get("/", (req, res) => {
 // VOLUNTEER API
 // ======================================
 
-app.post("/api/volunteer", (req, res) => {
+app.post("https://wed-development-aim4.onrender.com/api/volunteer", (req, res) => {
 
     try {
 
@@ -111,7 +111,7 @@ app.post("/api/volunteer", (req, res) => {
     }
 });
 
-app.get("/api/volunteers", (req, res) => {
+app.get("https://wed-development-aim4.onrender.com/api/volunteers", (req, res) => {
 
     try {
 
@@ -134,7 +134,7 @@ app.get("/api/volunteers", (req, res) => {
 // CONTACT API
 // ======================================
 
-app.post("/api/contact", (req, res) => {
+app.post("https://wed-development-aim4.onrender.com/api/contact", (req, res) => {
 
     try {
 
@@ -166,7 +166,7 @@ app.post("/api/contact", (req, res) => {
     }
 });
 
-app.get("/api/contacts", (req, res) => {
+app.get("https://wed-development-aim4.onrender.com/api/contacts", (req, res) => {
 
     try {
 
@@ -189,7 +189,7 @@ app.get("/api/contacts", (req, res) => {
 // DONATION API
 // ======================================
 
-app.post("/api/donate", (req, res) => {
+app.post("https://wed-development-aim4.onrender.com/api/api/donate", (req, res) => {
 
     try {
 
@@ -221,7 +221,7 @@ app.post("/api/donate", (req, res) => {
     }
 });
 
-app.get("/api/donations", (req, res) => {
+app.get("https://wed-development-aim4.onrender.com/api/api/donations", (req, res) => {
 
     try {
 
