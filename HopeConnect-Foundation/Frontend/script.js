@@ -381,67 +381,50 @@ if (newsletterForm) {
 // VOLUNTEER FORM BACKEND
 // =========================================
 
-const volunteerForm =
-document.getElementById("volunteerForm");
+const volunteerForm = document.getElementById("volunteerForm");
 
 if (volunteerForm) {
 
-    volunteerForm.addEventListener(
-        "submit",
-        async function (e) {
+    volunteerForm.addEventListener("submit", async (e) => {
 
-            e.preventDefault();
+        e.preventDefault();
 
-            const data = {
+        const volunteer = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            phone: document.getElementById("phone").value,
+            interest: document.getElementById("interest").value,
+            message: document.getElementById("message").value
+        };
 
-                name:
-                volunteerForm.querySelector(
-                    'input[type="text"]'
-                ).value,
+        const status = document.getElementById("status");
 
-                email:
-                volunteerForm.querySelector(
-                    'input[type="email"]'
-                ).value,
+        try {
 
-                phone:
-                volunteerForm.querySelector(
-                    'input[type="tel"]'
-                ).value,
+            const response = await fetch("https://YOUR-RENDER-URL/api/volunteer", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(volunteer)
+            });
 
-                interest:
-                volunteerForm.querySelector(
-                    'select'
-                ).value
-            };
+            const data = await response.json();
 
-            try {
+            status.style.color = "green";
+            status.textContent = data.message || "Registration Successful!";
 
-                const response = await fetch(
-                    "https://wed-development-aim4.onrender.com/api/volunteer",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(data)
-                    }
-                );
+            volunteerForm.reset();
 
-                const result = await response.json();
+        } catch (error) {
 
-                alert(result.message);
+            status.style.color = "red";
+            status.textContent = "Registration Failed.";
 
-                volunteerForm.reset();
-
-            } catch (error) {
-
-                console.error(error);
-
-                alert("Unable to connect to server.");
-            }
         }
-    );
+
+    });
+
 }
 
 // =========================================

@@ -41,28 +41,55 @@
 
 <form id="volunteerForm">
 
-<input type="text" name="name" placeholder="Full Name" required>
+    <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Full Name"
+        required
+    >
 
-<input type="email" name="email" placeholder="Email Address" required>
+    <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Email Address"
+        required
+    >
 
-<input type="tel" name="phone" placeholder="Phone Number" required>
+    <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="Phone Number"
+        required
+    >
 
-<select name="interest" required>
+    <select
+        id="interest"
+        name="interest"
+        required
+    >
+        <option value="">Select Area of Interest</option>
+        <option value="Education">Education</option>
+        <option value="Healthcare">Healthcare</option>
+        <option value="Women Empowerment">Women Empowerment</option>
+        <option value="Environment">Environment</option>
+        <option value="Fundraising">Fundraising</option>
+    </select>
 
-<select required>
-<option value="">Select Area of Interest</option>
-<option>Education</option>
-<option>Healthcare</option>
-<option>Women Empowerment</option>
-<option>Environment</option>
-<option>Fundraising</option>
-</select>
+    <textarea
+        id="message"
+        name="message"
+        rows="5"
+        placeholder="Tell us about yourself"
+    ></textarea>
 
-<textarea rows="5" placeholder="Tell us about yourself"></textarea>
+    <button class="btn primary-btn" type="submit">
+        Register As Volunteer
+    </button>
 
-<button class="btn primary-btn" type="submit">
-Register As Volunteer
-</button>
+    <p id="status"></p>
 
 </form>
 
