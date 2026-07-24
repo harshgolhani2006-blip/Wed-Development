@@ -134,29 +134,24 @@ app.get("https://wed-development-aim4.onrender.com/api/volunteers", (req, res) =
 // CONTACT API
 // ======================================
 
+
 app.post("https://wed-development-aim4.onrender.com/api/contact", (req, res) => {
-
     try {
+        const contacts = JSON.parse(fs.readFileSync(contactFile));
 
-        const contact = {
+        contacts.push({
             id: Date.now(),
-            ...req.body,
-            createdAt: new Date()
-        };
+            ...req.body
+        });
 
-        saveData(
-            contactFile,
-            contact
-        );
+        saveData(contactFile, contacts);
 
         res.json({
             success: true,
-            message:
-            "Message Sent Successfully"
+            message: "Thank you! We received your message."
         });
 
     } catch (error) {
-
         console.error(error);
 
         res.status(500).json({

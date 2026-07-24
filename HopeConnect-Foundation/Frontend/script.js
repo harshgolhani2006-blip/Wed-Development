@@ -471,69 +471,54 @@ document
 // CONTACT FORM BACKEND
 // =========================================
 
-const contactForm =
-document.getElementById("contactForm");
+const contactForm = document.getElementById("contactForm");
 
-if (contactForm) {
+if(contactForm){
 
-    contactForm.addEventListener(
-        "submit",
-        async function (e) {
+contactForm.addEventListener("submit", async function(e){
 
-            e.preventDefault();
+e.preventDefault();
 
-            const data = {
+const contact = {
+name: document.getElementById("name").value,
+email: document.getElementById("email").value,
+subject: document.getElementById("subject").value,
+message: document.getElementById("message").value
+};
 
-                name:
-                contactForm.querySelector(
-                    'input[type="text"]'
-                ).value,
+const status = document.getElementById("status");
 
-                email:
-                contactForm.querySelector(
-                    'input[type="email"]'
-                ).value,
+try{
 
-                subject:
-                contactForm.querySelectorAll(
-                    'input[type="text"]'
-                )[1].value,
+const response = await fetch("https://YOUR-BACKEND-URL/api/contact",{
 
-                message:
-                contactForm.querySelector(
-                    'textarea'
-                ).value
-            };
+method:"POST",
 
-            try {
+headers:{
+"Content-Type":"application/json"
+},
 
-                const response = await fetch(
-                    "https://wed-development-aim4.onrender.com/api/contact",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(data)
-                    }
-                );
+body:JSON.stringify(contact)
 
-                const result = await response.json();
+});
 
-                alert(result.message);
+const data = await response.json();
 
-                contactForm.reset();
+status.style.color="green";
+status.innerText=data.message || "Message Sent Successfully!";
 
-            } catch (error) {
+contactForm.reset();
 
-                console.error(error);
+}catch(error){
 
-                alert("Unable to connect to server.");
-            }
-        }
-    );
+status.style.color="red";
+status.innerText="Unable to send message.";
+
 }
 
+});
+
+}
 
 // =========================================
 // CURRENT YEAR IN FOOTER
