@@ -327,6 +327,306 @@ body{
     flex-wrap:wrap;
     justify-content:center;
 }
+/* ================================
+   MOBILE MENU + BACK BUTTON FIX
+   ================================ */
+
+@media (max-width: 850px){
+
+    .sidebar{
+        position:absolute;
+        top:0;
+        right:-100%;
+        width:100%;
+        height:100%;
+        background:#08111f;
+        padding:16px 14px 25px;
+        overflow-y:auto;
+        overflow-x:hidden;
+        z-index:1000;
+
+        transition:right .35s ease;
+    }
+
+    .sidebar.active{
+        right:0;
+    }
+
+    /* MENU HEADER */
+    .sidebar-header{
+        width:100%;
+        height:52px;
+
+        display:flex;
+        align-items:center;
+
+        gap:10px;
+        margin-bottom:14px;
+    }
+
+    /* BACK BUTTON */
+    .sidebar-back-btn{
+        display:flex !important;
+
+        width:44px;
+        height:44px;
+        min-width:44px;
+        min-height:44px;
+
+        align-items:center;
+        justify-content:center;
+
+        border:none;
+        border-radius:12px;
+
+        background:rgba(255,255,255,0.10);
+        color:#fff;
+
+        font-size:24px;
+        font-weight:bold;
+
+        cursor:pointer;
+
+        flex-shrink:0;
+
+        position:relative;
+        z-index:1001;
+
+        -webkit-tap-highlight-color:transparent;
+    }
+
+    .sidebar-back-btn:active{
+        transform:scale(.92);
+        background:#1db954;
+        color:#000;
+    }
+
+    .sidebar-header h2{
+        margin:0;
+        padding:0;
+
+        font-size:22px;
+        line-height:1;
+
+        color:#fff;
+    }
+
+    /* SEARCH */
+    .search-box{
+        width:100%;
+        height:48px;
+
+        padding:0 14px;
+
+        margin-bottom:12px;
+
+        border:none;
+        outline:none;
+        border-radius:12px;
+
+        background:#1b2636;
+        color:#fff;
+
+        font-size:15px;
+    }
+
+    .search-box::placeholder{
+        color:#94a3b8;
+    }
+
+    /* ADD SONG BUTTON */
+    #addSongBtn{
+        width:100%;
+        height:48px;
+
+        margin-bottom:18px;
+
+        border:none;
+        border-radius:12px;
+
+        background:#1db954;
+        color:#000;
+
+        font-size:15px;
+        font-weight:bold;
+
+        cursor:pointer;
+    }
+
+    #addSongBtn:active{
+        transform:scale(.98);
+    }
+
+    /* SONG CARD */
+    .song{
+        width:100%;
+        min-height:70px;
+
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+
+        padding:9px 10px;
+        margin-bottom:10px;
+
+        border-radius:14px;
+
+        background:#151f2e;
+
+        overflow:hidden;
+    }
+
+    .song.active{
+        background:#1db954;
+        color:#000;
+    }
+
+    .song-left{
+        display:flex;
+        align-items:center;
+
+        gap:10px;
+
+        min-width:0;
+        flex:1;
+    }
+
+    .song img{
+        width:50px;
+        height:50px;
+        min-width:50px;
+
+        border-radius:9px;
+
+        object-fit:cover;
+    }
+
+    .song-left > div{
+        min-width:0;
+    }
+
+    .song-left > div > div{
+        font-size:14px;
+        font-weight:bold;
+
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+
+    .song-left small{
+        font-size:11px;
+        color:#94a3b8;
+    }
+
+    .song.active small{
+        color:#17351f;
+    }
+
+    /* FAVORITE + REMOVE */
+    .fav-btn,
+    .remove-btn{
+        width:36px;
+        height:36px;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        border:none;
+        background:transparent;
+
+        font-size:19px;
+        cursor:pointer;
+
+        flex-shrink:0;
+    }
+
+    /* SCROLLBAR */
+    .sidebar::-webkit-scrollbar{
+        width:5px;
+    }
+
+    .sidebar::-webkit-scrollbar-track{
+        background:transparent;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb{
+        background:#1db954;
+        border-radius:10px;
+    }
+}
+
+
+/* ================================
+   SMALL MOBILE
+   ================================ */
+
+@media (max-width:480px){
+
+    .sidebar{
+        padding:12px 10px 20px;
+    }
+
+    .sidebar-header{
+        height:50px;
+        margin-bottom:12px;
+    }
+
+    .sidebar-back-btn{
+        width:42px;
+        height:42px;
+        min-width:42px;
+        min-height:42px;
+
+        font-size:22px;
+    }
+
+    .sidebar-header h2{
+        font-size:20px;
+    }
+
+    .song{
+        min-height:66px;
+        padding:8px;
+    }
+
+    .song img{
+        width:48px;
+        height:48px;
+        min-width:48px;
+    }
+
+    .fav-btn,
+    .remove-btn{
+        width:34px;
+        height:34px;
+        font-size:18px;
+    }
+}
+
+
+/* ================================
+   VERY SMALL MOBILE
+   ================================ */
+
+@media (max-width:360px){
+
+    .sidebar{
+        padding:10px 8px 18px;
+    }
+
+    .sidebar-back-btn{
+        width:40px;
+        height:40px;
+        min-width:40px;
+        min-height:40px;
+    }
+
+    .sidebar-header h2{
+        font-size:19px;
+    }
+}
 
 </style>
 </head>
