@@ -605,26 +605,75 @@ body{
     }
 }
 
+/* MENU HEADER */
+.sidebar-header {
+    width: 100%;
+    height: 52px;
 
-/* ================================
-   VERY SMALL MOBILE
-   ================================ */
+    display: flex;
+    align-items: center;
+    gap: 12px;
 
-@media (max-width:360px){
+    margin-bottom: 18px;
+}
 
-    .sidebar{
-        padding:10px 8px 18px;
+/* BACK BUTTON INSIDE MENU */
+.sidebar-back-btn {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* HOVER */
+.sidebar-back-btn:hover {
+    background: #1db954;
+    color: black;
+    transform: scale(1.05);
+}
+
+/* CLICK */
+.sidebar-back-btn:active {
+    transform: scale(0.92);
+}
+
+/* MENU TITLE */
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 22px;
+    color: white;
+}
+@media (max-width: 850px) {
+
+    .sidebar-header {
+        height: 52px;
+        margin-bottom: 14px;
     }
 
-    .sidebar-back-btn{
-        width:40px;
-        height:40px;
-        min-width:40px;
-        min-height:40px;
+    .sidebar-back-btn {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        font-size: 24px;
     }
 
-    .sidebar-header h2{
-        font-size:19px;
+    .sidebar-header h2 {
+        font-size: 21px;
     }
 }
 
@@ -638,9 +687,7 @@ body{
 
 <div class="top-left">
 
-<button class="back-btn" id="backBtn">
-←
-</button>
+
 
 <div class="logo">
 🎵 Music Player
@@ -722,9 +769,13 @@ value="0.8">
 
 <div class="sidebar" id="sidebar">
 
-<h2>
-🎶 Playlist
-</h2>
+  <div class="sidebar-header">
+        <button class="sidebar-back-btn" id="sidebarBackBtn">
+            ←
+        </button>
+
+        <h2>🎶 Playlist</h2>
+    </div>
 
 <input
 type="text"
@@ -837,7 +888,7 @@ audio.volume = 0.8;
 
 const sidebar = document.getElementById("sidebar");
 const menuBtn = document.getElementById("menuBtn");
-const backBtn = document.getElementById("backBtn");
+const backBtn = document.getElementById("sidebarBackBtn");
 const playlistEl = document.getElementById("playlist");
 const playBtn = document.getElementById("playBtn");
 const nextBtn = document.getElementById("nextBtn");
@@ -860,9 +911,10 @@ const fileInput =
 document.getElementById("fileInput");
 
 menuBtn.onclick = ()=>{
-
 sidebar.classList.toggle("active");
-
+};
+backBtn.onclick = () => {
+    sidebar.classList.remove("active");
 };
 
 function loadTrack(i){
