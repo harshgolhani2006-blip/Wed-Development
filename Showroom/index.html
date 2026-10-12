@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore cars and bikes at Motors Showroom. Compare vehicles, calculate EMI and request a test drive.">
+  <title>Motors Showroom | Find Your Perfect Ride</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <nav class="navbar">
+    <a class="logo" href="#home" aria-label="Motors Showroom home">MOTORS <span>SHOWROOM</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a><a href="#inventory">Vehicles</a><a href="#emi">EMI Calculator</a><a href="#about">About</a><a href="#contact">Contact</a>
+      <a class="btn btn-red" href="#testdrive">Book Test Drive</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <div class="hero-content">
+      <p class="eyebrow">YOUR JOURNEY STARTS HERE</p>
+      <h1>Find Your<br><span>Perfect Ride.</span></h1>
+      <p class="hero-text">Discover cars and bikes that match your style, your needs, and your budget.</p>
+      <div class="hero-actions"><a class="btn btn-red" href="#inventory">Explore Vehicles</a><a class="btn btn-outline" href="#testdrive">Book a Test Drive</a></div>
+      <div class="hero-points"><span>✓ Trusted guidance</span><span>✓ Wide selection</span><span>✓ Easy enquiries</span></div>
+    </div>
+    <div class="hero-image" role="img" aria-label="Sports car on a dramatic road"></div>
+  </header>
+
+  <main>
+    <section class="section" id="inventory">
+      <div class="section-heading">
+        <div><p class="eyebrow">OUR COLLECTION</p><h2>Featured Vehicles</h2><p class="muted">Explore our demo collection. Update the vehicle list in <code>script.js</code> with your actual stock.</p></div>
+      </div>
+      <div class="category-tabs" role="group" aria-label="Vehicle category">
+        <button class="tab active" data-category="cars">Cars</button><button class="tab" data-category="bikes">Bikes</button><button class="tab" data-category="all">All Vehicles</button>
+      </div>
+      <div class="filters">
+        <label>Search by name or brand<input id="searchInput" type="search" placeholder="e.g. Tata, Yamaha"></label>
+        <label>Vehicle type<select id="typeFilter"><option value="">All types</option></select></label>
+        <label>Fuel<select id="fuelFilter"><option value="">All fuels</option></select></label>
+        <label>Maximum price<select id="priceFilter"><option value="">Any price</option><option value="200000">Up to ₹2 lakh</option><option value="700000">Up to ₹7 lakh</option><option value="1500000">Up to ₹15 lakh</option><option value="5000000">Up to ₹50 lakh</option></select></label>
+        <label>Sort by<select id="sortFilter"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="year">Newest first</option></select></label>
+        <button class="btn btn-outline reset-btn" id="resetFilters">Reset filters</button>
+      </div>
+      <p class="results-count" id="resultsCount" aria-live="polite"></p>
+      <div class="vehicle-grid" id="vehicleGrid"></div>
+      <p class="disclaimer">Demo listing and prices are illustrative only. Confirm specifications, availability and final prices with the showroom.</p>
+    </section>
+
+    <section class="section dark-section" id="emi">
+      <div class="split">
+        <div><p class="eyebrow">PLAN YOUR PURCHASE</p><h2>EMI Calculator</h2><p class="muted">Estimate your monthly loan payment. Actual offers depend on lender terms and eligibility.</p></div>
+        <div class="calculator panel">
+          <label>Vehicle price (₹)<input type="number" id="vehiclePrice" min="0" value="1000000"></label>
+          <label>Down payment (₹)<input type="number" id="downPayment" min="0" value="200000"></label>
+          <label>Annual interest rate (%)<input type="number" id="interestRate" min="0" max="50" step="0.1" value="9"></label>
+          <label>Loan tenure<select id="loanTenure"><option value="12">1 year</option><option value="24">2 years</option><option value="36">3 years</option><option value="48">4 years</option><option value="60" selected>5 years</option><option value="72">6 years</option><option value="84">7 years</option></select></label>
+          <div class="emi-results"><div><span>Monthly EMI</span><strong id="emiAmount">₹0</strong></div><div><span>Loan amount</span><strong id="loanAmount">₹0</strong></div><div><span>Total interest</span><strong id="totalInterest">₹0</strong></div><div><span>Total repayment</span><strong id="totalRepayment">₹0</strong></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="testdrive">
+      <div class="split">
+        <div><p class="eyebrow">GET BEHIND THE WHEEL</p><h2>Book a Test Drive</h2><p class="muted">Tell us which vehicle you want to experience. This demo validates your form in the browser; it does not send the details to the showroom.</p><div class="contact-highlight"><strong>Need help?</strong><p>Call the showroom using the contact details you add below.</p></div></div>
+        <form class="panel form-grid" id="testDriveForm">
+          <label>Full name<input name="name" required autocomplete="name" placeholder="Your name"></label>
+          <label>Mobile number<input name="mobile" required inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10-digit mobile number"></label>
+          <label>Email address<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+          <label>Vehicle<select name="vehicle" id="testVehicle" required><option value="">Select a vehicle</option></select></label>
+          <label>Preferred date<input name="date" id="testDate" type="date" required></label>
+          <label>Preferred time<select name="time"><option>10:00 AM</option><option>12:00 PM</option><option>3:00 PM</option><option>5:00 PM</option></select></label>
+          <label class="full-width">Message<textarea name="message" rows="3" placeholder="Anything we should know?"></textarea></label>
+          <button class="btn btn-red full-width" type="submit">Request Test Drive</button>
+          <p class="form-message full-width" id="testDriveMessage" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section dark-section" id="about">
+      <div class="section-heading"><div><p class="eyebrow">WHY MOTORS SHOWROOM</p><h2>Driven by Trust.</h2><p class="muted">A simpler way to find your next car or bike.</p></div></div>
+      <div class="feature-grid">
+        <article class="feature-card"><span>01</span><h3>Wide Selection</h3><p>Explore different vehicle styles and budgets in one place.</p></article>
+        <article class="feature-card"><span>02</span><h3>Clear Information</h3><p>Compare listed prices, vehicle details and key features.</p></article>
+        <article class="feature-card"><span>03</span><h3>Helpful Support</h3><p>Contact the showroom to discuss your needs before buying.</p></article>
+        <article class="feature-card"><span>04</span><h3>Easy Test Drives</h3><p>Send a request and arrange a suitable visit with the team.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="split">
+        <div><p class="eyebrow">LET'S TALK</p><h2>Contact Us</h2><p class="muted">Replace these sample details with your actual showroom contact information.</p>
+          <div class="contact-details"><p><strong>Address</strong><br><span>Your showroom address, City</span></p><p><strong>Phone</strong><br><a href="tel:+910000000000">+91 00000 00000</a></p><p><strong>Email</strong><br><a href="mailto:hello@example.com">hello@example.com</a></p><p><strong>Hours</strong><br>Monday–Saturday, 10 AM–7 PM</p></div>
+          <a class="btn btn-green" href="https://wa.me/910000000000?text=Hello%20Motors%20Showroom" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        </div>
+        <form class="panel form-grid" id="contactForm">
+          <label class="full-width">Your name<input name="name" required placeholder="Your name"></label>
+          <label class="full-width">Mobile number<input name="mobile" required inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10-digit mobile number"></label>
+          <label class="full-width">Your message<textarea name="message" rows="5" required placeholder="How can we help?"></textarea></label>
+          <button class="btn btn-red full-width" type="submit">Validate Enquiry</button>
+          <p class="form-message full-width" id="contactMessage" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer><a class="logo" href="#home">MOTORS <span>SHOWROOM</span></a><p>Find your perfect ride. Vehicle information and prices are demo content until updated.</p><p class="copyright">© <span id="year"></span> Motors Showroom. All rights reserved.</p></footer>
+
+  <div class="modal-backdrop" id="vehicleModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Close details">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
