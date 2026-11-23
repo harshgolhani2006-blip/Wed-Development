@@ -1,0 +1,752 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Motors Showroom | Premium Cars & Bikes</title>
+
+  <meta name="description"
+    content="Explore premium cars and bikes at Motors Showroom. Discover your dream ride and book a test drive.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+
+  <header class="header" id="header">
+
+    <div class="container navbar">
+
+      <a href="#home" class="logo">
+        <span class="logo-icon">M</span>
+        <span>MOTORS<span class="logo-highlight">.</span></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a>
+        <a href="#inventory">Vehicles</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+
+        <button class="icon-btn" id="wishlistNavBtn"
+          aria-label="Open wishlist" title="Wishlist">
+          <span>♡</span>
+          <span class="wishlist-count" id="wishlistCount">0</span>
+        </button>
+
+        <a href="#test-drive" class="btn btn-primary nav-book-btn">
+          Book Test Drive
+        </a>
+
+        <button class="menu-toggle" id="menuToggle"
+          aria-label="Toggle navigation">
+          ☰
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <main>
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+
+      <div class="hero-overlay"></div>
+
+      <div class="container hero-content">
+
+        <div class="hero-text">
+
+          <span class="eyebrow">
+            PREMIUM AUTOMOBILE COLLECTION
+          </span>
+
+          <h1>
+            FIND YOUR
+            <span>DREAM RIDE.</span>
+          </h1>
+
+          <p>
+            Discover extraordinary cars and bikes.
+            Experience performance, luxury and style
+            with Motors Showroom.
+          </p>
+
+          <div class="hero-buttons">
+
+            <a href="#inventory" class="btn btn-primary">
+              Explore Collection →
+            </a>
+
+            <a href="#about" class="btn btn-outline">
+              Discover More
+            </a>
+
+          </div>
+
+          <div class="hero-stats">
+
+            <div>
+              <h3>100+</h3>
+              <p>Happy Customers</p>
+            </div>
+
+            <div>
+              <h3>50+</h3>
+              <p>Premium Vehicles</p>
+            </div>
+
+            <div>
+              <h3>10+</h3>
+              <p>Years Experience</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= INVENTORY ================= -->
+
+    <section class="inventory section-padding" id="inventory">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="eyebrow">OUR COLLECTION</span>
+
+          <h2>Explore Our <span>Vehicles</span></h2>
+
+          <p>
+            Choose from our exclusive collection of
+            premium cars and bikes.
+          </p>
+
+        </div>
+
+
+        <!-- Category Tabs -->
+
+        <div class="inventory-tabs">
+
+          <button class="tab-btn active" data-category="All">
+            All Vehicles
+          </button>
+
+          <button class="tab-btn" data-category="Car">
+            Cars
+          </button>
+
+          <button class="tab-btn" data-category="Bike">
+            Bikes
+          </button>
+
+        </div>
+
+
+        <!-- Search and Filters -->
+
+        <div class="filter-panel">
+
+          <div class="search-box">
+            <span>⌕</span>
+            <input type="search" id="searchInput"
+              placeholder="Search vehicles or brands...">
+          </div>
+
+          <select id="brandFilter">
+            <option value="All">All Brands</option>
+          </select>
+
+          <select id="fuelFilter">
+            <option value="All">All Fuel Types</option>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Electric">Electric</option>
+            <option value="Hybrid">Hybrid</option>
+          </select>
+
+          <select id="priceFilter">
+            <option value="All">All Prices</option>
+            <option value="0-500000">Below ₹5 Lakh</option>
+            <option value="500000-1500000">₹5–15 Lakh</option>
+            <option value="1500000-3000000">₹15–30 Lakh</option>
+            <option value="3000000-100000000">Above ₹30 Lakh</option>
+          </select>
+
+          <select id="sortFilter">
+            <option value="default">Sort By</option>
+            <option value="low-high">Price: Low to High</option>
+            <option value="high-low">Price: High to Low</option>
+            <option value="name">Name: A to Z</option>
+          </select>
+
+        </div>
+
+
+        <!-- Inventory Information -->
+
+        <div class="inventory-info">
+
+          <p>
+            Showing <strong id="vehicleCount">0</strong> vehicles
+          </p>
+
+          <button class="text-btn" id="clearFilters">
+            Clear Filters
+          </button>
+
+        </div>
+
+
+        <!-- Vehicle Cards -->
+
+        <div class="vehicle-grid" id="vehicleGrid">
+
+          <div class="loading-message">
+            Loading vehicles...
+          </div>
+
+        </div>
+
+
+        <div class="empty-state" id="emptyState" hidden>
+          <h3>No Vehicles Found</h3>
+          <p>Try changing your search or filters.</p>
+        </div>
+
+
+        <div class="inventory-footer">
+          <button class="btn btn-outline" id="showMoreBtn">
+            Show More Vehicles
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= COMPARE ================= -->
+
+    <section class="compare-section section-padding" id="compare">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="eyebrow">MAKE THE RIGHT CHOICE</span>
+
+          <h2>Compare <span>Vehicles</span></h2>
+
+          <p>
+            Compare your favourite vehicles before making
+            your final decision.
+          </p>
+
+        </div>
+
+        <div class="compare-content" id="compareContent">
+
+          <div class="compare-empty">
+            <h3>No Vehicles Selected</h3>
+            <p>Add vehicles to compare from the collection above.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= WHY CHOOSE US ================= -->
+
+    <section class="features section-padding">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="eyebrow">THE MOTORS EXPERIENCE</span>
+
+          <h2>Why Choose <span>Us?</span></h2>
+
+          <p>
+            We make finding your dream vehicle simple
+            and enjoyable.
+          </p>
+
+        </div>
+
+        <div class="features-grid">
+
+          <article class="feature-card">
+            <div class="feature-icon">✦</div>
+            <h3>Premium Collection</h3>
+            <p>Explore carefully selected cars and bikes
+              from trusted brands.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">✓</div>
+            <h3>Trusted Service</h3>
+            <p>Get helpful guidance throughout your
+              vehicle buying journey.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">₹</div>
+            <h3>Easy EMI Planning</h3>
+            <p>Calculate estimated monthly payments
+              before purchasing.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">↗</div>
+            <h3>Test Drive</h3>
+            <p>Experience your favourite vehicle
+              before making a decision.</p>
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= EMI CALCULATOR ================= -->
+
+    <section class="emi-section section-padding" id="emi">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="eyebrow">PLAN YOUR PURCHASE</span>
+
+          <h2>EMI <span>Calculator</span></h2>
+
+          <p>
+            Calculate your estimated monthly vehicle
+            loan payment.
+          </p>
+
+        </div>
+
+        <div class="emi-card">
+
+          <div class="emi-form">
+
+            <div class="form-group">
+              <label for="loanAmount">Loan Amount (₹)</label>
+              <input type="number" id="loanAmount"
+                value="1000000" min="1">
+            </div>
+
+            <div class="form-group">
+              <label for="interestRate">Interest Rate (%)</label>
+              <input type="number" id="interestRate"
+                value="9" min="0" step="0.1">
+            </div>
+
+            <div class="form-group">
+              <label for="loanTenure">Loan Tenure (Years)</label>
+              <input type="number" id="loanTenure"
+                value="5" min="1" max="30">
+            </div>
+
+            <button class="btn btn-primary" id="calculateEMI">
+              Calculate EMI
+            </button>
+
+          </div>
+
+          <div class="emi-result">
+
+            <span>Estimated Monthly EMI</span>
+
+            <h2 id="emiValue">₹20,758</h2>
+
+            <div class="emi-details">
+
+              <div>
+                <span>Principal Amount</span>
+                <strong id="emiPrincipal">₹10,00,000</strong>
+              </div>
+
+              <div>
+                <span>Total Interest</span>
+                <strong id="emiInterest">₹2,45,480</strong>
+              </div>
+
+              <div>
+                <span>Total Payment</span>
+                <strong id="emiTotal">₹12,45,480</strong>
+              </div>
+
+            </div>
+
+            <p class="small-note">
+              This is an estimate. Actual EMI may vary
+              depending on lender terms and charges.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= TEST DRIVE ================= -->
+
+    <section class="test-drive-section section-padding" id="test-drive">
+
+      <div class="container">
+
+        <div class="test-drive-wrapper">
+
+          <div class="test-drive-text">
+
+            <span class="eyebrow">GET BEHIND THE WHEEL</span>
+
+            <h2>Book Your <span>Test Drive</span></h2>
+
+            <p>
+              Ready to experience your dream vehicle?
+              Fill out the form and our team will contact you.
+            </p>
+
+          </div>
+
+          <form id="testDriveForm" class="contact-form">
+
+            <div class="form-row">
+
+              <div class="form-group">
+                <label for="testName">Full Name *</label>
+                <input type="text" id="testName"
+                  name="name" placeholder="Enter your name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="testEmail">Email Address *</label>
+                <input type="email" id="testEmail"
+                  name="email" placeholder="Enter your email" required>
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group">
+                <label for="testPhone">Phone Number *</label>
+                <input type="tel" id="testPhone"
+                  name="phone" placeholder="Enter phone number" required>
+              </div>
+
+              <div class="form-group">
+                <label for="testVehicle">Select Vehicle *</label>
+                <select id="testVehicle" name="vehicle" required>
+                  <option value="">Choose a vehicle</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <label for="testDate">Preferred Date</label>
+              <input type="date" id="testDate" name="date">
+            </div>
+
+            <div class="form-group">
+              <label for="testMessage">Additional Message</label>
+              <textarea id="testMessage" name="message"
+                rows="4" placeholder="Any additional information..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              Submit Test Drive Request
+            </button>
+
+            <p id="testDriveMessage" class="form-message"
+              role="status"></p>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="about-section section-padding" id="about">
+
+      <div class="container about-grid">
+
+        <div class="about-image">
+          <img
+            src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1000&q=85"
+            alt="Premium automobile">
+        </div>
+
+        <div class="about-content">
+
+          <span class="eyebrow">ABOUT MOTORS SHOWROOM</span>
+
+          <h2>Your Journey.<br>
+            <span>Our Passion.</span>
+          </h2>
+
+          <p>
+            Motors Showroom brings together style,
+            performance and quality. Our goal is to help
+            customers discover vehicles that match their
+            needs and dreams.
+          </p>
+
+          <p>
+            From premium cars to powerful bikes, explore
+            our collection and enjoy a better vehicle
+            shopping experience.
+          </p>
+
+          <a href="#inventory" class="btn btn-primary">
+            Explore Vehicles →
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="contact-section section-padding" id="contact">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="eyebrow">GET IN TOUCH</span>
+
+          <h2>Contact <span>Us</span></h2>
+
+          <p>
+            Have questions? Send us a message.
+            Our team will be happy to help.
+          </p>
+
+        </div>
+
+        <div class="contact-wrapper">
+
+          <div class="contact-info">
+
+            <div class="contact-info-card">
+              <span>⌖</span>
+              <div>
+                <h3>Our Location</h3>
+                <p>Motors Showroom, India</p>
+              </div>
+            </div>
+
+            <div class="contact-info-card">
+              <span>☎</span>
+              <div>
+                <h3>Call Us</h3>
+                <p>Contact our showroom team</p>
+              </div>
+            </div>
+
+            <div class="contact-info-card">
+              <span>✉</span>
+              <div>
+                <h3>Email Us</h3>
+                <p>info@motorsshowroom.in</p>
+              </div>
+            </div>
+
+          </div>
+
+          <form id="contactForm" class="contact-form">
+
+            <div class="form-group">
+              <label for="contactName">Your Name *</label>
+              <input type="text" id="contactName"
+                name="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contactEmail">Email Address *</label>
+              <input type="email" id="contactEmail"
+                name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contactSubject">Subject</label>
+              <input type="text" id="contactSubject"
+                name="subject" placeholder="Enter subject">
+            </div>
+
+            <div class="form-group">
+              <label for="contactMessage">Your Message *</label>
+              <textarea id="contactMessage" name="message"
+                rows="5" placeholder="Write your message..."
+                required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              Send Message →
+            </button>
+
+            <p id="contactMessageStatus" class="form-message"
+              role="status"></p>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+
+        <a href="#home" class="logo">
+          <span class="logo-icon">M</span>
+          <span>MOTORS<span class="logo-highlight">.</span></span>
+        </a>
+
+        <p>
+          Discover premium cars and bikes.
+          Find your dream ride with Motors Showroom.
+        </p>
+
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <a href="#home">Home</a>
+        <a href="#inventory">Vehicles</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="footer-links">
+        <h3>Our Services</h3>
+        <a href="#test-drive">Book Test Drive</a>
+        <a href="#emi">EMI Calculator</a>
+        <a href="#compare">Compare Vehicles</a>
+      </div>
+
+      <div class="footer-links">
+        <h3>Follow Us</h3>
+        <a href="#contact">Instagram</a>
+        <a href="#contact">Facebook</a>
+        <a href="#contact">LinkedIn</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p>
+        © <span id="currentYear"></span> Motors Showroom.
+        All Rights Reserved.
+      </p>
+      <a href="#home">Back to Top ↑</a>
+    </div>
+
+  </footer>
+
+
+  <!-- ================= VEHICLE MODAL ================= -->
+
+  <div class="modal" id="vehicleModal" aria-hidden="true">
+
+    <div class="modal-backdrop" data-close-modal></div>
+
+    <div class="modal-content">
+
+      <button class="modal-close" data-close-modal
+        aria-label="Close modal">×</button>
+
+      <div id="vehicleModalContent"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= WISHLIST MODAL ================= -->
+
+  <div class="modal" id="wishlistModal" aria-hidden="true">
+
+    <div class="modal-backdrop" data-close-modal></div>
+
+    <div class="modal-content wishlist-modal-content">
+
+      <button class="modal-close" data-close-modal
+        aria-label="Close modal">×</button>
+
+      <h2>My <span>Wishlist</span></h2>
+
+      <div id="wishlistContent"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= NOTIFICATION ================= -->
+
+  <div class="toast" id="toast" role="status"></div>
+
+
+  <!-- JavaScript -->
+
+  <script src="script.js"></script>
+
+</body>
+</html>

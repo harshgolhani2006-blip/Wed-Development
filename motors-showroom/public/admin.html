@@ -1,0 +1,547 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Dashboard | Motors Showroom</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+  <!-- ================= LOGIN PAGE ================= -->
+
+  <section class="login-page" id="loginPage">
+
+    <div class="login-card">
+
+      <a href="/" class="logo">
+        <span class="logo-icon">M</span>
+        <span>MOTORS<span class="highlight">.</span></span>
+      </a>
+
+      <div class="login-heading">
+        <span class="eyebrow">ADMINISTRATION</span>
+        <h1>Welcome Back</h1>
+        <p>Sign in to manage your showroom.</p>
+      </div>
+
+      <form id="loginForm">
+
+        <div class="form-group">
+          <label for="adminEmail">Email Address</label>
+          <input
+            type="email"
+            id="adminEmail"
+            name="email"
+            placeholder="Enter admin email"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="adminPassword">Password</label>
+          <input
+            type="password"
+            id="adminPassword"
+            name="password"
+            placeholder="Enter password"
+            autocomplete="current-password"
+            required
+          >
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="loginButton">
+          Sign In
+        </button>
+
+        <p class="message" id="loginMessage" role="status"></p>
+
+      </form>
+
+      <a href="/" class="back-link">← Back to Website</a>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= DASHBOARD ================= -->
+
+  <section class="dashboard" id="dashboard" hidden>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar" id="sidebar">
+
+      <a href="/" class="logo">
+        <span class="logo-icon">M</span>
+        <span>MOTORS<span class="highlight">.</span></span>
+      </a>
+
+      <div class="sidebar-label">MAIN MENU</div>
+
+      <nav class="sidebar-nav">
+
+        <button class="sidebar-link active" data-section="overview">
+          <span>▦</span> Overview
+        </button>
+
+        <button class="sidebar-link" data-section="vehicles">
+          <span>🚘</span> Vehicles
+        </button>
+
+        <button class="sidebar-link" data-section="testDrives">
+          <span>📅</span> Test Drive Requests
+        </button>
+
+        <button class="sidebar-link" data-section="messages">
+          <span>✉</span> Contact Messages
+        </button>
+
+      </nav>
+
+      <div class="sidebar-bottom">
+
+        <a href="/" class="sidebar-link">
+          <span>↗</span> Visit Website
+        </a>
+
+        <button class="sidebar-link logout-btn" id="logoutButton">
+          <span>⇥</span> Logout
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="dashboard-main">
+
+      <!-- TOPBAR -->
+
+      <header class="dashboard-header">
+
+        <button class="mobile-menu" id="sidebarToggle"
+          aria-label="Toggle sidebar">
+          ☰
+        </button>
+
+        <div>
+          <h1>Dashboard</h1>
+          <p>Welcome to Motors Showroom Administration</p>
+        </div>
+
+        <div class="admin-profile">
+          <div class="profile-avatar">A</div>
+          <div>
+            <strong>Administrator</strong>
+            <span id="adminEmailDisplay">Admin</span>
+          </div>
+        </div>
+
+      </header>
+
+
+      <!-- NOTIFICATION -->
+
+      <div class="admin-notice" id="adminNotice" role="status"></div>
+
+
+      <!-- ================= OVERVIEW ================= -->
+
+      <section class="admin-section active" id="overviewSection">
+
+        <div class="section-title">
+          <div>
+            <span class="eyebrow">OVERVIEW</span>
+            <h2>Dashboard Overview</h2>
+            <p>Monitor your showroom activity.</p>
+          </div>
+
+          <button class="btn btn-outline" id="refreshDashboard">
+            ↻ Refresh
+          </button>
+        </div>
+
+
+        <!-- STATISTICS -->
+
+        <div class="stats-grid">
+
+          <article class="stat-card">
+            <div class="stat-icon red">🚘</div>
+            <div>
+              <span>Total Vehicles</span>
+              <h3 id="totalVehicles">0</h3>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon blue">📅</div>
+            <div>
+              <span>Test Drive Requests</span>
+              <h3 id="totalTestDrives">0</h3>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon green">✉</div>
+            <div>
+              <span>Contact Messages</span>
+              <h3 id="totalMessages">0</h3>
+            </div>
+          </article>
+
+        </div>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="panel">
+
+          <div class="panel-heading">
+            <h3>Quick Actions</h3>
+          </div>
+
+          <div class="quick-actions">
+
+            <button class="quick-action"
+              data-section="vehicles">
+              <span>＋</span>
+              <strong>Add Vehicle</strong>
+              <small>Add a new car or bike</small>
+            </button>
+
+            <button class="quick-action"
+              data-section="testDrives">
+              <span>📅</span>
+              <strong>View Bookings</strong>
+              <small>Check test drive requests</small>
+            </button>
+
+            <button class="quick-action"
+              data-section="messages">
+              <span>✉</span>
+              <strong>View Messages</strong>
+              <small>Read customer enquiries</small>
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= VEHICLES ================= -->
+
+      <section class="admin-section" id="vehiclesSection">
+
+        <div class="section-title">
+
+          <div>
+            <span class="eyebrow">INVENTORY MANAGEMENT</span>
+            <h2>Manage Vehicles</h2>
+            <p>Add, update and delete showroom vehicles.</p>
+          </div>
+
+          <button class="btn btn-primary" id="addVehicleButton">
+            + Add Vehicle
+          </button>
+
+        </div>
+
+
+        <!-- ADD / EDIT VEHICLE FORM -->
+
+        <div class="panel vehicle-form-panel" id="vehicleFormPanel" hidden>
+
+          <div class="panel-heading">
+            <h3 id="vehicleFormTitle">Add New Vehicle</h3>
+            <button class="close-form" id="closeVehicleForm"
+              aria-label="Close form">×</button>
+          </div>
+
+          <form id="vehicleForm">
+
+            <input type="hidden" id="vehicleId">
+
+            <div class="form-grid">
+
+              <div class="form-group">
+                <label for="vehicleName">Vehicle Name *</label>
+                <input type="text" id="vehicleName"
+                  placeholder="Example: BMW 5 Series" required>
+              </div>
+
+              <div class="form-group">
+                <label for="vehicleBrand">Brand *</label>
+                <input type="text" id="vehicleBrand"
+                  placeholder="Example: BMW" required>
+              </div>
+
+              <div class="form-group">
+                <label for="vehicleType">Vehicle Type *</label>
+                <select id="vehicleType" required>
+                  <option value="">Select Type</option>
+                  <option value="Car">Car</option>
+                  <option value="Bike">Bike</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="vehiclePrice">Price (₹) *</label>
+                <input type="number" id="vehiclePrice"
+                  min="1" placeholder="Enter price" required>
+              </div>
+
+              <div class="form-group">
+                <label for="vehicleFuel">Fuel Type</label>
+                <select id="vehicleFuel">
+                  <option value="Petrol">Petrol</option>
+                  <option value="Diesel">Diesel</option>
+                  <option value="Electric">Electric</option>
+                  <option value="Hybrid">Hybrid</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="vehicleTransmission">Transmission</label>
+                <select id="vehicleTransmission">
+                  <option value="Manual">Manual</option>
+                  <option value="Automatic">Automatic</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="vehicleYear">Manufacturing Year</label>
+                <input type="number" id="vehicleYear"
+                  min="1900" max="2100" placeholder="2025">
+              </div>
+
+              <div class="form-group">
+                <label for="vehicleMileage">Mileage / Range</label>
+                <input type="text" id="vehicleMileage"
+                  placeholder="Example: 15 km/l">
+              </div>
+
+              <div class="form-group full-width">
+                <label for="vehicleImage">Vehicle Image URL</label>
+                <input type="url" id="vehicleImage"
+                  placeholder="https://example.com/image.jpg">
+              </div>
+
+              <div class="form-group full-width">
+                <label for="vehicleDescription">Description</label>
+                <textarea id="vehicleDescription" rows="4"
+                  placeholder="Write vehicle description..."></textarea>
+              </div>
+
+              <div class="form-group full-width checkbox-group">
+                <label>
+                  <input type="checkbox" id="vehicleFeatured">
+                  Mark as Featured Vehicle
+                </label>
+              </div>
+
+            </div>
+
+            <div class="form-actions">
+
+              <button type="submit" class="btn btn-primary"
+                id="saveVehicleButton">
+                Save Vehicle
+              </button>
+
+              <button type="button" class="btn btn-outline"
+                id="cancelVehicleButton">
+                Cancel
+              </button>
+
+            </div>
+
+            <p class="message" id="vehicleFormMessage"></p>
+
+          </form>
+
+        </div>
+
+
+        <!-- VEHICLE TABLE -->
+
+        <div class="panel">
+
+          <div class="panel-heading">
+            <h3>Vehicle Inventory</h3>
+
+            <button class="btn btn-outline" id="refreshVehicles">
+              ↻ Refresh
+            </button>
+          </div>
+
+          <div class="table-wrapper">
+
+            <table class="admin-table">
+
+              <thead>
+                <tr>
+                  <th>Vehicle</th>
+                  <th>Brand</th>
+                  <th>Type</th>
+                  <th>Price</th>
+                  <th>Fuel</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="vehiclesTableBody">
+                <tr>
+                  <td colspan="6" class="table-empty">
+                    Loading vehicles...
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= TEST DRIVES ================= -->
+
+      <section class="admin-section" id="testDrivesSection">
+
+        <div class="section-title">
+
+          <div>
+            <span class="eyebrow">CUSTOMER BOOKINGS</span>
+            <h2>Test Drive Requests</h2>
+            <p>View customer test drive enquiries.</p>
+          </div>
+
+          <button class="btn btn-outline" id="refreshTestDrives">
+            ↻ Refresh
+          </button>
+
+        </div>
+
+        <div class="panel">
+
+          <div class="table-wrapper">
+
+            <table class="admin-table">
+
+              <thead>
+                <tr>
+                  <th>Customer</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Vehicle</th>
+                  <th>Date</th>
+                  <th>Requested On</th>
+                </tr>
+              </thead>
+
+              <tbody id="testDrivesTableBody">
+                <tr>
+                  <td colspan="6" class="table-empty">
+                    No requests loaded.
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= CONTACT MESSAGES ================= -->
+
+      <section class="admin-section" id="messagesSection">
+
+        <div class="section-title">
+
+          <div>
+            <span class="eyebrow">CUSTOMER ENQUIRIES</span>
+            <h2>Contact Messages</h2>
+            <p>Read messages submitted by customers.</p>
+          </div>
+
+          <button class="btn btn-outline" id="refreshMessages">
+            ↻ Refresh
+          </button>
+
+        </div>
+
+        <div class="panel">
+
+          <div class="table-wrapper">
+
+            <table class="admin-table">
+
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Subject</th>
+                  <th>Message</th>
+                  <th>Received On</th>
+                </tr>
+              </thead>
+
+              <tbody id="messagesTableBody">
+                <tr>
+                  <td colspan="5" class="table-empty">
+                    No messages loaded.
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- FOOTER -->
+
+      <footer class="dashboard-footer">
+        © <span id="adminYear"></span> Motors Showroom Admin Panel
+      </footer>
+
+    </main>
+
+  </section>
+
+
+  <!-- JavaScript -->
+
+  <script src="admin.js"></script>
+
+</body>
+</html>
