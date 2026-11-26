@@ -1,13 +1,12 @@
-
 {
   "name": "motors-showroom",
   "version": "1.0.0",
   "description": "Premium Cars and Bikes Showroom Website",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
-  },
+  "start": "node server.js",
+  "dev": "node --watch server.js"
+},
   "keywords": [
     "motors",
     "showroom",
@@ -26,8 +25,5 @@
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.10"
   }
 }
